@@ -1,0 +1,12 @@
+.App {
+}
+
+.App-header {
+  display: flex;
+  border-bottom: 1px solid #000;
+}
+
+.App-intro {
+  font-size: large;
+}
+

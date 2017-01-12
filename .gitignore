@@ -1,0 +1,10 @@
+# Don't check auto-generated stuff into git
+build
+node_modules
+coverage
+
+.DS_Store
+npm-debug.log
+.cs_files
+.cs_workspaces
+todo.md

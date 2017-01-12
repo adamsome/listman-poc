@@ -1,0 +1,85 @@
+{
+  "name": "listman",
+  "version": "0.0.1",
+  "description": "List Manager written in React",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamsome/listman.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "start": "cross-env NODE_ENV=development node server",
+    "test": "node scripts/test.js --env=jsdom"
+  },
+  "author": "Adam Some",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "case-sensitive-paths-webpack-plugin": "^1.1.4",
+    "css-loader": "^0.26.1",
+    "dotenv": "^4.0.0",
+    "enzyme": "^2.7.0",
+    "eslint": "^3.8.1",
+    "eslint-config-react-app": "^0.5.0",
+    "eslint-loader": "^1.6.0",
+    "eslint-plugin-flowtype": "^2.22.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1",
+    "exports-loader": "^0.6.3",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.26.0",
+    "jest": "^17.0.3",
+    "postcss-loader": "^1.2.1",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dev-utils": "^0.4.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-hot-middleware": "^2.15.0"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "cross-env": "^3.1.4",
+    "express": "^4.14.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "whatwg-fetch": "^2.0.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "app/**/*.{js,jsx}"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](build|docs|node_modules)[/\\\\]"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}
