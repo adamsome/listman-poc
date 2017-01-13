@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Item from '../index'
+import Item from './index'
 
 let wrapper
 

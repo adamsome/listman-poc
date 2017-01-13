@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 
-import List from '..'
-import Item from '../../../components/Item'
+import List from './index'
+import Item from '../../components/Item'
 
 let wrapper
 
