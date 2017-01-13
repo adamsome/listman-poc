@@ -1,15 +1,18 @@
-const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const getClientEnvironment = require('./env');
 
+const setEnvDefault = require('./env');
+const { BUILD, APP } = require('./paths');
+
+const publicPath = '/';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
 const publicUrl = '';
 // Get environment variables to inject into our app.
-const env = getClientEnvironment(publicUrl);
+setEnvDefault('PUBLIC_URL', publicUrl);
 
 // This is the baseline configuration.
 // Called by the dev and prod configurations to get baseline defaults.
@@ -19,9 +22,9 @@ module.exports = (options) => ({
 
   // Merge with environment-specific settings
   output: Object.assign({
-    path: path.resolve(process.cwd(), 'build'),
+    path: BUILD,
     // URL that app is served from ('/' in dev for ease of use)
-    publicPath: '/',
+    publicPath: publicPath,
   }, options.output),
 
   module: {
@@ -31,7 +34,7 @@ module.exports = (options) => ({
       {
         test: /\.(js|jsx)$/,
         loader: 'eslint',
-        include: path.resolve(process.cwd(), 'app'),
+        include: APP,
       }
     ],
     loaders: [
@@ -71,6 +74,11 @@ module.exports = (options) => ({
         exclude: /node_modules/,
         query: options.babelQuery,
       },
+      // Load CSS files that are imported
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss'),
+      },
       // Optimate web images
       {
         test: /\.(jpg|png|gif)$/,
@@ -93,9 +101,7 @@ module.exports = (options) => ({
           name: 'static/media/[name].[hash:8].[ext]'
         }
       }
-    ].concat(options.styleLoaders),
-    // TODO: test w/ ExtractTextPlugin in DEV
-    // Add the environment-specific style (CSS) loaders
+    ],
   },
   // We use PostCSS for autoprefixing only.
   postcss: function() {
@@ -111,6 +117,8 @@ module.exports = (options) => ({
     ];
   },
   plugins: options.plugins.concat([
+    new ExtractTextPlugin('[name].css'),
+    // Consolidate vendor JS libraries into its own JS file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       children: true,
@@ -129,7 +137,12 @@ module.exports = (options) => ({
     }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
-    new webpack.DefinePlugin(env),
+    new webpack.DefinePlugin({
+      'process.env': {
+        PORT: JSON.stringify(process.env.PORT),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
     new webpack.NamedModulesPlugin(),
   ]),
 

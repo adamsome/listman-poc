@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
+const { APP_INDEX } = require('./paths');
+
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 module.exports = require('./webpack.base.config')({
@@ -16,7 +18,7 @@ module.exports = require('./webpack.base.config')({
     // Default polyfills
     'babel-polyfill',
     // Finally, this is your app's code:
-    path.join(process.cwd(), 'app/index.js'),
+    APP_INDEX,
     // We include the app code last so that if there is a runtime
     // error during initialization, it doesn't blow up the client, and
     // changing JS code would still trigger a refresh.
@@ -30,11 +32,6 @@ module.exports = require('./webpack.base.config')({
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
   },
-  // The style/CSS loaders are different in dev vs. prod.
-  styleLoaders: [{
-    test: /\.css$/,
-    loader: 'style!css?importLoaders=1!postcss'
-  }],
   // Load the dependency handler plugins and default plugins
   plugins: [
     // Generates an `index.html` file with the <script> injected.
