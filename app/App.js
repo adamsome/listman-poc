@@ -1,17 +1,15 @@
 import React from 'react'
 
+import Layout from './components/Layout'
 import './App.css'
-import List from './containers/List'
 
 export default class App extends React.Component {
   render() {
+    const { children } = this.props
     return (
-      <div className="App">
-        <h1 className="App-header">
-          Basic
-        </h1>
-        <List />
-      </div>
+      <Layout>
+        { children }
+      </Layout>
     )
   }
 }

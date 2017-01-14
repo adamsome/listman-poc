@@ -2,12 +2,13 @@ import React from 'react'
 
 import Item from '../../components/Item'
 
-export default class List extends React.Component {
+export default class Lists extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       items: []
+      //items: [{ title: 'Item 1' }, { title: 'Item 2' }]
     }
   }
 
@@ -17,7 +18,7 @@ export default class List extends React.Component {
     }
 
     return (
-      <div className="list">
+      <div className="lists">
         { this._renderItems() }
       </div>
     )

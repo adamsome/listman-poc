@@ -10,15 +10,15 @@ import { BUILD, PUBLIC } from '../config/paths'
 import Error500 from './templates/Error500'
 
 const PORT = process.env.PORT
-const oneDay = 1000 * 60 * 60 * 24;
+const oneDay = 1000 * 60 * 60 * 24
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([path.resolve(process.cwd(), 'app/index.js')])) {
-  process.exit(1);
+  process.exit(1)
 }
 
 // TODO: Implement PROD server
-const app = express();
+const app = express()
 
 app.set('etag', true)
 app.use((req, res, next) => {
@@ -74,21 +74,21 @@ const fs = memFS
 //app.get('*', setRouterContext, renderApp(assets))
 
 app.get('*', (req, res) => {
-  fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
+  fs.readFile(path.join(outputPath, 'index.html'), (err, file) => {
     if (err) {
-      res.sendStatus(404);
+      res.sendStatus(404)
     } else {
-      res.send(file.toString());
+      res.send(file.toString())
     }
-  });
-});
+  })
+})
 
 // TODO: Should return/export the express app, not launch itself
 // TODO: Detect port conflicts (see CRA)
 // Start the server
 app.listen(PORT, (err) => {
   if (err) {
-    return console.log(err.message);
+    return console.log(err.message)
   }
   printServerStarting()
-});
+})

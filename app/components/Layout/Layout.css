@@ -1,0 +1,43 @@
+@media screen and (min-width: 980px) {
+  .layout {
+    margin: 0 auto;
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1180px) {
+  .layout {
+    max-width: 1200px;
+  }
+}
+
+.layout {
+  position: relative;
+  width: 100%;
+}
+
+.layout__nav {
+  padding: 0 2.25%;
+  height: 3em;
+}
+
+.layout__nav-header {
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.layout__nav-link {
+  margin: 0 16px;
+  line-height: 2em;
+}
+
+.layout__content {
+  min-height: 90vh;
+  padding: 0 2.25%;
+}
+
+.layout__footer {
+  padding: 0 2.25%;
+  height: 2em;
+  line-height: 2em;
+}

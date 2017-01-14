@@ -77,7 +77,9 @@ module.exports = (options) => ({
       // Load CSS files that are imported
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss'),
+        loader: 'style!css?importLoaders=1!postcss'
+        // TODO: Put in PROD config
+        //loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss'),
       },
       // Optimate web images
       {
@@ -117,7 +119,8 @@ module.exports = (options) => ({
     ];
   },
   plugins: options.plugins.concat([
-    new ExtractTextPlugin('[name].css'),
+    // TODO: Put in PROD config
+    //new ExtractTextPlugin('[name].css'),
     // Consolidate vendor JS libraries into its own JS file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',

@@ -1,14 +1,14 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 
-import List from './index'
+import Lists from './index'
 import Item from '../../components/Item'
 
 let wrapper
 
-describe('<List>', () => {
+describe('<Lists>', () => {
   beforeEach(() => {
-    wrapper = mount(<List />)
+    wrapper = mount(<Lists />)
   })
 
   it('exists', () => {
@@ -29,7 +29,7 @@ describe('<List>', () => {
     })
     expect(wrapper.state().items).toBeInstanceOf(Array)
     expect(wrapper.state().items.length).toEqual(1)
-    expect(wrapper.find('.list')).toHaveLength(1)
+    expect(wrapper.find('.lists')).toHaveLength(1)
 
     const child = wrapper.childAt(0)
     const childProps = child.props()
