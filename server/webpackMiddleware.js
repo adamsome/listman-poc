@@ -1,4 +1,5 @@
 import chalk from 'chalk'
+import path from 'path'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -88,11 +89,7 @@ function addCustomCompilerMessages(compiler) {
   });
 }
 
-// TODO: TEMP REMOVE FS
-let outputPath
-let memFS
-
-const createWebpackCompiler = (config) => {
+const makeCompiler = (config) => {
   // "Compiler" is a low-level interface to Webpack.
   // It lets us listen to some events and provide our own custom messages.
   const compiler = webpack(config)
@@ -101,11 +98,15 @@ const createWebpackCompiler = (config) => {
   return compiler
 }
 
-const createWebpackMiddlewares = (config, compiler) => {
-  if (!compiler) compiler = createWebpackCompiler(config)
+// `makeMiddleware` sets outputPath & webpack fileSystem used by `renderApp`
+let outputPath
+let fileSystem
 
-  let middlewares = {}
-  middlewares.dev = webpackDevMiddleware(compiler, {
+const makeMiddleware = (config, compiler) => {
+  if (!compiler) compiler = makeCompiler(config)
+
+  let middleware = []
+  middleware.push(webpackDevMiddleware(compiler, {
     // Use the same public path as the webpack config
     publicPath: config.output.publicPath,
     // Only display warnings and errors to the console
@@ -113,20 +114,32 @@ const createWebpackMiddlewares = (config, compiler) => {
     silent: true,
     quiet: true,
     stats: 'errors-only',
-  })
-  middlewares.hmr = webpackHotMiddleware(compiler)
+  }))
+  middleware.push(webpackHotMiddleware(compiler))
 
-  // TODO: TEMP REMOVE FS
-  memFS = middlewares.dev.fileSystem
   outputPath = compiler.outputPath
-  return middlewares
+  fileSystem = middleware[0].fileSystem
+
+  return middleware
 }
 
-const printServerStarting = () => {
-  const isTTY = process.stdout.isTTY
-  const protocol = process.env.HTTPS === 'true' ? "https" : "http"
-  const host = process.env.HOST || 'localhost'
+const renderApp = (req, res) => {
+  if (!fileSystem) {
+    throw Error('makeMiddleware must be called before renderApp')
+  }
+  fileSystem.readFile(path.join(outputPath, 'index.html'), (err, file) => {
+    if (err) {
+      res.sendStatus(404)
+    } else {
+      res.send(file.toString())
+    }
+  })
+}
 
+const handleOpenBrowser = (err) => {
+  if (err) {
+    return console.log(err.message)
+  }
   if (isTTY) {
     clearConsole()
   }
@@ -134,17 +147,9 @@ const printServerStarting = () => {
     'Starting the ' + process.env.NODE_ENV + ' server...'
   ))
   console.log()
-
   if (isTTY) {
     openBrowser(protocol + '://' + host + ':' + process.env.PORT + '/')
   }
 }
 
-// TODO: TEMP REMOVE FS
-export {
-  createWebpackCompiler,
-  createWebpackMiddlewares,
-  printServerStarting,
-  memFS,
-  outputPath
-}
+export { makeCompiler, makeMiddleware, renderApp, handleOpenBrowser }
