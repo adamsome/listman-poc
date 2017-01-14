@@ -1,64 +1,54 @@
 const webpack = require('webpack');
-const path = require('path');
-const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const { APP_INDEX } = require('./paths');
 
-// This is the development configuration.
-// It is focused on developer experience and fast rebuilds.
+// DEV config - Focus on DX and fast rebuilds
 module.exports = require('./webpack.base.config')({
-  // These are the "entry points" to our application.
-  // This means they will be the "root" imports that are included in JS bundle.
+  // Root imports included in output JS bundle
   entry: [
     // Hot reload JS and CSS
     'webpack-hot-middleware/client',
     // Default polyfills
     'babel-polyfill',
-    // Finally, this is your app's code:
+    // App code - Last so that if there is a runtime error during init,
+    // it doesn't abort & changing JS code still triggers a refresh
     APP_INDEX,
-    // We include the app code last so that if there is a runtime
-    // error during initialization, it doesn't blow up the client, and
-    // changing JS code would still trigger a refresh.
   ],
   output: {
-    // This does not produce a real file. It's just the virtual path that is
-    // served by WebpackDevServer in development. This is the JS bundle
-    // containing code from all our entry points, and the Webpack runtime.
+    // Virtual path served by WebpackDevServer
+    // JS bundle w/ code from all entries plus the Webpack runtime
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     // Add /* filename */ comments to generated require()s in the output.
     pathinfo: true,
   },
+  // Load CSS files that are imported
+  styleLoader: {
+    test: /\.css$/,
+    loader: 'style!css?importLoaders=1!postcss'
+  },
   // Load the dependency handler plugins and default plugins
   plugins: [
-    // Generates an `index.html` file with the <script> injected.
+    // Generates an `index.html` file with the <script>'s injected.
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       inject: true,
     }),
     // This is necessary to emit hot updates.
     new webpack.HotModuleReplacementPlugin(),
-    // Watcher doesn't work well if you mistype casing in a path so we use
-    // a plugin that prints an error when you attempt to do this.
-    // See https://github.com/facebookincubator/create-react-app/issues/240
+    // Prevents silent errors from mis-cased import paths
     new CaseSensitivePathsPlugin(),
-    // If you require a missing module and then `npm install` it, you still have
-    // to restart the development server for Webpack to discover it. This plugin
-    // makes the discovery automatic so you don't have to restart.
-    // See https://github.com/facebookincubator/create-react-app/issues/186
+    // Auto-restart dev server after `npm install`
     new WatchMissingNodeModulesPlugin('node_modules'),
   ],
   babelQuery: {
-    // This is a feature of `babel-loader` for webpack (not Babel itself).
-    // It enables caching results in ./node_modules/.cache/babel-loader/
-    // directory for faster rebuilds.
+    // Allows fast rebuilds by `babel-loader` by cahing results
     cacheDirectory: true,
     presets: ['react-hmre'],
   },
-  // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-  // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
+  // Use 'eval' instead to see the compiled output in DevTools.
   devtool: 'cheap-module-source-map',
 });
