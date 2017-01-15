@@ -2,13 +2,14 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-import App from './App'
+import Layout from './index'
 
 let wrapper
 beforeEach(() => {
-  wrapper = shallow(<App />)
+  wrapper = shallow(<Layout />)
 })
 
 it('renders correctly', () => {
   expect(toJson(wrapper)).toMatchSnapshot()
 })
+
