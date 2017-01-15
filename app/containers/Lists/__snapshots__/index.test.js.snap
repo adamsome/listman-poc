@@ -2,7 +2,7 @@ exports[`test renders <div> w/ correct children of type <Item> 1`] = `
 <div
   className="lists">
   <Item
-    title="One" />
+    title="Test One" />
 </div>
 `;
 

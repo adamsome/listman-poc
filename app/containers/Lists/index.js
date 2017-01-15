@@ -1,19 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
 import Item from '../../components/Item'
+import { fetchLists } from './actions'
 
-export default class Lists extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      items: []
-      //items: [{ title: 'Item 1' }, { title: 'Item 2' }]
-    }
+export class Lists extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchLists())
   }
 
   render() {
-    if (!this.state.items.length) {
+    const { lists } = this.props
+    if (!lists.length) {
       return <div>No Items!</div>
     }
 
@@ -25,13 +24,24 @@ export default class Lists extends React.Component {
   }
 
   _renderItems() {
-    return this.state.items.map((item, index) => {
+    const { lists } = this.props
+    return lists.map((list, index) => {
       return (
         <Item
           key={ index }
-          title={ item.title }
+          title={ list.title }
         />
       )
     })
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    lists: state.lists.lists,
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Lists)

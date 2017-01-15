@@ -2,36 +2,24 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-import Lists from './index'
+import { Lists } from './index'
 import Item from '../../components/Item'
 
-let wrapper
-beforeEach(() => {
-  wrapper = shallow(<Lists />)
-})
-
 it('renders null based on initial state (empty "list" array)', () => {
-  expect(wrapper.state().items).toBeInstanceOf(Array)
-  expect(wrapper.state().items.length).toEqual(0)
-  expect(wrapper.html()).toContain("No Items")
+  let wrapper = shallow(<Lists lists={[]}/>)
+  expect(wrapper.contains(<div>No Items!</div>)).toBe(true)
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
 it('renders <div> w/ correct children of type <Item>', () => {
-  wrapper.setState({
-    items: [
-      { title: 'One' }
-    ]
-  })
-  expect(wrapper.state().items).toBeInstanceOf(Array)
-  expect(wrapper.state().items.length).toEqual(1)
+  let wrapper = shallow(<Lists lists={[ { title: 'Test One' } ]}/>)
   expect(wrapper.find('.lists')).toHaveLength(1)
 
   const child = wrapper.childAt(0)
   const childProps = child.props()
 
   expect(child.type()).toEqual(Item)
-  expect(childProps.title).toEqual('One')
+  expect(childProps.title).toEqual('Test One')
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
