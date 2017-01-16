@@ -1,0 +1,14 @@
+.list-tile {
+  padding-bottom: 0.5rem;
+}
+.list-tile__title-wrapper {
+  display: block;
+  min-height: 60px;
+}
+
+.list-tile__title {
+  display: inline-block;
+  overflow: hidden;
+  max-height: 48px;
+}
+

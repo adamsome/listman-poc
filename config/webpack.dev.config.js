@@ -27,8 +27,8 @@ module.exports = require('./webpack.base.config')({
   },
   // Load CSS files that are imported
   styleLoader: {
-    test: /\.css$/,
-    loader: 'style!css?importLoaders=1!postcss'
+    test: /\.scss$/,
+    loader: 'style!css?importLoaders=2!postcss!sass?outputStyle=expanded&sourceMap'
   },
   // Load the dependency handler plugins and default plugins
   plugins: [

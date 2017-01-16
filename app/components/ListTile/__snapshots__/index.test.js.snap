@@ -1,0 +1,12 @@
+exports[`test shows title 1`] = `
+<a
+  className="list-tile box">
+  <span
+    className="list-tile__title-wrapper">
+    <span
+      className="list-tile__title title is-4">
+      ListTile Title
+    </span>
+  </span>
+</a>
+`;

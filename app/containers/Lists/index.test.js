@@ -3,22 +3,21 @@ import { mount, shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
 import { Lists } from './index'
-import Item from '../../components/Item'
+import ListTile from '../../components/ListTile'
 
 it('renders null based on initial state (empty "list" array)', () => {
-  let wrapper = shallow(<Lists lists={[]}/>)
+  const wrapper = shallow(<Lists lists={[]}/>)
   expect(wrapper.contains(<div>No Items!</div>)).toBe(true)
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
 it('renders <div> w/ correct children of type <Item>', () => {
-  let wrapper = shallow(<Lists lists={[ { title: 'Test One' } ]}/>)
-  expect(wrapper.find('.lists')).toHaveLength(1)
+  const wrapper = shallow(<Lists lists={[ { title: 'Test One' } ]}/>)
+  expect(wrapper.find(ListTile)).toHaveLength(1)
 
-  const child = wrapper.childAt(0)
+  const child = wrapper.find(ListTile).first()
   const childProps = child.props()
-
-  expect(child.type()).toEqual(Item)
+  expect(child.type()).toEqual(ListTile)
   expect(childProps.title).toEqual('Test One')
   expect(toJson(wrapper)).toMatchSnapshot()
 })

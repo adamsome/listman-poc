@@ -1,39 +1,18 @@
 exports[`test renders correctly 1`] = `
-<div
-  className="layout layout--main">
-  <nav
-    className="layout__nav">
-    <span
-      className="layout__nav-header">
-      Listman
-    </span>
-    <Link
-      activeClassName="layout__nav-link--selected"
-      className="layout__nav-link"
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/">
-      Home
-    </Link>
-    <Link
-      activeClassName="layout__nav-link--selected"
-      className="layout__nav-link"
-      onlyActiveOnIndex={false}
-      style={Object {}}
-      to="/lists/">
-      Lists
-    </Link>
-  </nav>
-  <div
-    className="layout__content" />
+<div>
+  <section
+    className="section" />
   <footer
-    className="layout__footer">
-    v0.1: No Functionality (
-    <a
-      href="http://github.com/adamsome/listman">
-      github.com/adamsome/listman
-    </a>
-    )
+    className="footer">
+    <div
+      className="container has-text-centered">
+      v0.1: No Functionality (
+      <a
+        href="http://github.com/adamsome/listman">
+        github.com/adamsome/listman
+      </a>
+      )
+    </div>
   </footer>
 </div>
 `;

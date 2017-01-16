@@ -32,7 +32,7 @@ module.exports = (options) => ({
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
-          /\.css$/,
+          /\.(css)|(scss)$/,
           /\.(jpg|png|gif)$/,
           /\.json$/,
           /\.(eot|svg|ttf|woff|woff2)$/
