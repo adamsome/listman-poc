@@ -1,22 +1,24 @@
-const initialState = {
-  lists: []
-}
+import { DEV_lists, DEV_userProfile } from '../../devUtil'
 
-// TODO: Async load lists from server
-const testLists = [
-  { title: 'Sample List No. 1 w/ many items' },
-  { title: 'List Two of Samples' },
-  { title: 'Third List of Samples with a very, very, long title' },
-  { title: 'Sample List IV' },
-  { title: 'Fifth Samples Listing' },
-]
+const initialState = {
+  lists: [],
+  user: DEV_userProfile,
+}
 
 function lists(state = initialState, action) {
   switch (action.type) {
   case 'FETCH_LISTS':
     return {
       ...state,
-      lists: testLists
+      lists: DEV_lists
+    }
+  case 'ADD_LIST':
+    return {
+      ...state,
+      lists: [
+        ...state.lists,
+        action.list,
+      ]
     }
   default:
     return state
