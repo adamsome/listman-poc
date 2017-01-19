@@ -1,19 +1,19 @@
 exports[`test renders <div> w/ correct children of type <Tile> 1`] = `
-<div
-  className="columns is-multiline">
-  <div
-    className="column is-one-quarter">
+<Columns
+  multiline={true}>
+  <Column
+    widthOutOf12="3">
     <Tile
       name="Test One" />
-  </div>
-</div>
+  </Column>
+</Columns>
 `;
 
 exports[`test renders null based on initial state (empty "list" array) 1`] = `
-<div
-  className="columns is-multiline">
+<Columns
+  multiline={true}>
   <div>
     No Items!
   </div>
-</div>
+</Columns>
 `;
