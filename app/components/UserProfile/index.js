@@ -2,10 +2,9 @@ import React from 'react'
 
 import Media from '../Media'
 import Avatar from './Avatar'
-import './UserProfile.scss'
 
 const renderUserProfile = (user) => (
-  <div className="user-profile">
+  <div>
     <Media
       left={(
         <Avatar

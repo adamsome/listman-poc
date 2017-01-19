@@ -11,7 +11,7 @@ it('renders null based on initial state (empty "list" array)', () => {
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
-it('renders <div> w/ correct children of type <Item>', () => {
+it('renders <div> w/ correct children of type <ListTile>', () => {
   const title = 'Test One'
   const wrapper = shallow(<ListTiles lists={[ { title } ]}/>)
   expect(wrapper.find(ListTile)).toHaveLength(1)

@@ -24,14 +24,9 @@ const renderTiles = (items, getTitle = (item => item.title)) => {
 
 // TODO: Add reactProps
 const ListTiles = ({ lists, isLoading }) => (
-  <div className="container">
-    <h2 className="title is-2">
-      Lists
-    </h2>
     <div className="columns is-multiline">
       {(isLoading) ? renderTilesLoading() : renderTiles(lists)}
     </div>
-  </div>
 )
 
 export default ListTiles
