@@ -1,5 +1,4 @@
 import uuidV4 from 'uuid/v4'
-import { normalize, schema } from 'normalizr'
 
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
@@ -35,12 +34,8 @@ const fakeUserListsResponse = () => {
 }
 
 // Normalizr user lists schema
-const list = new schema.Entity('lists')
-const user = new schema.Entity('users', { 
-  lists: [ list ]
-})
 
 // TODO: Move normalize to actions
 // TODO: Use real API
-export const fetchLists = (userID) =>
-  delay(350).then(() => normalize(fakeUserListsResponse(), user))
+export const fetchUserLists = (userID) =>
+  delay(350).then(() => fakeUserListsResponse())

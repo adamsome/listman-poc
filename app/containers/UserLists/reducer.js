@@ -1,6 +1,6 @@
 export const users = (state = {}, action) => {
   switch (action.type) {
-  case 'LISTS_RECEIVE':
+  case 'USER_LISTS_RECEIVE':
     if (action.res) {
       return {
         ...state,
@@ -15,7 +15,7 @@ export const users = (state = {}, action) => {
 
 export const lists = (state = {}, action) => {
   switch (action.type) {
-  case 'LISTS_RECEIVE':
+  case 'USER_LISTS_RECEIVE':
     if (action.res) {
       return {
         ...state,

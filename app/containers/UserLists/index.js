@@ -1,26 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { fetchLists } from './actions'
+import { fetchUserLists } from './actions'
 import UserPage from '../../components/UserPage'
 
 export class UserLists extends React.Component {
   componentDidMount() {
     const { userID } = this.props.params
     // TODO: Should fetch?
-    this.fetchLists(userID)
+    this.fetchUserLists(userID)
   }
 
   componentDidUpdate(prevProps) {
     const { userID } = this.props.params
     if (userID === prevProps.params.userID) return
     // TODO: Should fetch?
-    this.fetchLists(userID)
+    this.fetchUserLists(userID)
   }
 
-  fetchLists(userID) {
-    const { fetchLists } = this.props
-    fetchLists(userID)
+  fetchUserLists(userID) {
+    const { fetchUserLists } = this.props
+    fetchUserLists(userID)
   }
 
   render() {
@@ -43,5 +43,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { fetchLists },
+  { fetchUserLists },
 )(UserLists)

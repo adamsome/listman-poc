@@ -1,11 +1,14 @@
-import * as api from '../../api'
+import { normalize } from 'normalizr'
 
-const receiveLists = (res) => ({
-  type: 'LISTS_RECEIVE',
+import * as api from '../../api'
+import { userListsSchema } from '../../api/schemas'
+
+const receiveUserLists = (res) => ({
+  type: 'USER_LISTS_RECEIVE',
   res,
 })
 
-export const fetchLists = (userID) =>
-  api.fetchLists(userID).then(res =>
-    receiveLists(res)
+export const fetchUserLists = (userID) =>
+  api.fetchUserLists(userID).then(res =>
+    receiveUserLists(normalize(res, userListsSchema))
   )
