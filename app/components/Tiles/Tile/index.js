@@ -2,12 +2,14 @@ import React from 'react';
 
 import './Tile.scss'
 
-const Tile = (props) => {
+let className = "tile box"
+
+const Tile = ({ name, isLoading }) => {
   return (
-    <a className="tile box">
+    <a className={(isLoading) ? className + " tile--loading" : className}>
       <span className="tile__title-wrapper">
         <span className="tile__title title is-4">
-          {props.name}
+          {name || ' '}
         </span>
       </span>
     </a>

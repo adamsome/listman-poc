@@ -4,34 +4,29 @@ import Tile from './Tile'
 import Columns from '../Layout/Columns'
 import Column from '../Layout/Columns/Column'
 
-const renderTilesLoading = () => {
-  return <div>Loading</div>
-}
-
-const renderTiles = (entities, getEntityName = (entity => entity.name)) => {
-  if (!entities || !entities.length) {
-    return <div>No Items!</div>
-  }
-      //<div key={index} className="column is-one-quarter">
-  return entities.map((entity, index) => {
-    return (
-      <Column key={index} widthOutOf12="3">
-        <Tile name={getEntityName(entity)} />
-      </Column>
-    )
-  })
-}
+// Column width out of 12, e.g. 3 => 3/12 => 1/4 => 4 columns per row
+const columnWidth = 3
+// If loading, use blank entity objects as the loading indicator
+const loadingEntities = [ {}, {}, {}, {} ]
+// If no transform passed to get entities' name, use entity.name by default
+const defaultGetEntityName = (entity) => entity.name
 
 // TODO: Add reactProps
-const Tiles = ({ entities, getEntityName, isLoading }) => (
-  <Columns multiline>
-    {
-      (isLoading)
-        ? renderTilesLoading()
-        : renderTiles(entities, getEntityName)
-    }
-  </Columns>
-)
+const Tiles = ({ entities = [],
+                 isLoading,
+                 getEntityName = defaultGetEntityName, }) => {
+  const es = (isLoading) ? loadingEntities : entities
+  return (
+    <Columns multiline>
+      {
+        es.map((entity, index) => (
+          <Column key={index} widthOutOf12={columnWidth}>
+            <Tile name={getEntityName(entity)} isLoading={isLoading} />
+          </Column>
+        ))
+      }
+    </Columns>
+  )
+}
 
 export default Tiles
-

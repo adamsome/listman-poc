@@ -1,6 +1,12 @@
 .tile {
   padding-bottom: 0.5rem;
 }
+
+.tile--loading {
+  background-color: #f6f6f6;
+  box-shadow: 0 2px 3px rgba(5, 5, 5, 0), 0 0 0 1px rgba(5, 5, 5, 0);
+}
+
 .tile__title-wrapper {
   display: block;
   min-height: 60px;
