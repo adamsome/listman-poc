@@ -2,12 +2,12 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-import { Lists } from './index'
+import { UserLists } from './index'
 import UserPage from '../../components/UserPage'
 
 it('passes isLoading false when user defined', () => {
   const wrapper = shallow(
-    <Lists
+    <UserLists
       user={{
         username: "test_username",
         description: "description of user",
@@ -23,7 +23,7 @@ it('passes isLoading false when user defined', () => {
 
 it('passes isLoading true when user undefined', () => {
   const wrapper = shallow(
-    <Lists />
+    <UserLists />
   )
   const child = wrapper.find(UserPage).first()
   expect(child.props().isLoading).toBe(true)
@@ -32,7 +32,7 @@ it('passes isLoading true when user undefined', () => {
 it('fetches on mount', () => {
   const mockFetch = jest.fn()
   const wrapper = mount(
-    <Lists
+    <UserLists
       fetchLists={mockFetch}
       params={{userID: "test_username"}}
       user={{

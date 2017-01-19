@@ -3,13 +3,13 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './App'
 import Home from './containers/Home'
-import Lists from './containers/Lists'
+import UserLists from './containers/UserLists'
 import NotFound from './components/NotFound'
 
 export default (
   <Route path="/" component={App} name="app">
     <IndexRoute component={Home} />
-    <Route path=":userID" component={Lists} />
+    <Route path=":userID" component={UserLists} />
     <Route path="*" component={NotFound} />
   </Route>
 );

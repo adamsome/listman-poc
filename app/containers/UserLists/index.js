@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchLists } from './actions'
 import UserPage from '../../components/UserPage'
 
-export class Lists extends React.Component {
+export class UserLists extends React.Component {
   componentDidMount() {
     const { userID } = this.props.params
     // TODO: Should fetch?
@@ -44,4 +44,4 @@ function mapStateToProps(state, ownProps) {
 export default connect(
   mapStateToProps,
   { fetchLists },
-)(Lists)
+)(UserLists)
