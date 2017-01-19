@@ -4,12 +4,12 @@ import Media from '../Media'
 import Avatar from './Avatar'
 import './UserProfile.scss'
 
-const UserProfile = ({ user }) => (
+const renderUserProfile = (user) => (
   <div className="user-profile">
     <Media
       left={(
         <Avatar
-          username={user.username}
+          username={user.id}
           imgSrc={user.avatar}
         />
       )}
@@ -24,7 +24,7 @@ const UserProfile = ({ user }) => (
     >
       <div>
         <h1 className="title is-1">
-          {user.username}
+          {user.id}
         </h1>
         <p className="subtitle is-5">
           {user.description}
@@ -33,6 +33,12 @@ const UserProfile = ({ user }) => (
     </Media>
   </div>
 )
+
+const UserProfile = ({ user }) => {
+  if (!user) return(<div>No user</div>)
+
+  return renderUserProfile(user)
+}
 
 export default UserProfile
 

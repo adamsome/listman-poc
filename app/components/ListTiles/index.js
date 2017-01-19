@@ -2,29 +2,34 @@ import React from 'react'
 
 import ListTile from './ListTile'
 
-const renderListTiles = (lists) => {
-  if (!lists.length) {
+const renderTilesLoading = () => {
+  return <div>Loading</div>
+}
+
+const renderTiles = (items, getTitle = (item => item.title)) => {
+  if (!items || !items.length) {
     return <div>No Items!</div>
   }
-  return lists.map((list, index) => {
+  return items.map((item, index) => {
     return (
       <div key={index} className="column is-one-quarter">
         <ListTile
           key={index}
-          title={list.title}
+          title={getTitle(item)}
         />
       </div>
     )
   })
 }
 
-const ListTiles = ({ lists }) => (
+// TODO: Add reactProps
+const ListTiles = ({ lists, isLoading }) => (
   <div className="container">
     <h2 className="title is-2">
       Lists
     </h2>
     <div className="columns is-multiline">
-      {renderListTiles(lists)}
+      {(isLoading) ? renderTilesLoading() : renderTiles(lists)}
     </div>
   </div>
 )

@@ -9,7 +9,7 @@ import NotFound from './components/NotFound'
 export default (
   <Route path="/" component={App} name="app">
     <IndexRoute component={Home} />
-    <Route path="/lists/" component={Lists} />
+    <Route path=":userID" component={Lists} />
     <Route path="*" component={NotFound} />
   </Route>
 );

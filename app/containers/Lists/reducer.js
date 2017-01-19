@@ -1,28 +1,38 @@
-import { DEV_lists, DEV_userProfile } from '../../devUtil'
-
-const initialState = {
-  lists: [],
-  user: DEV_userProfile,
-}
-
-function lists(state = initialState, action) {
+export const users = (state = {}, action) => {
   switch (action.type) {
-  case 'FETCH_LISTS':
-    return {
-      ...state,
-      lists: DEV_lists
+  case 'LISTS_RECEIVE':
+    if (action.res) {
+      return {
+        ...state,
+        ...action.res.entities.users,
+      }
     }
-  case 'ADD_LIST':
-    return {
-      ...state,
-      lists: [
-        ...state.lists,
-        action.list,
-      ]
-    }
+    return state
   default:
     return state
   }
 }
 
-export default lists
+export const lists = (state = {}, action) => {
+  switch (action.type) {
+  case 'LISTS_RECEIVE':
+    if (action.res) {
+      return {
+        ...state,
+        ...action.res.entities.lists,
+      }
+    }
+    return state
+  //case 'ADD_LIST':
+    //return {
+      //...state,
+      //lists: [
+        //...state.lists,
+        //action.list,
+      //]
+    //}
+  default:
+    return state
+  }
+}
+

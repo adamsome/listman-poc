@@ -8,7 +8,7 @@ it('renders correctly', () => {
   const wrapper = shallow(
     <UserProfile
       user={{
-        username: "test_username",
+        id: "test_username",
         description: "description of user",
         avatar: "http://path/to/avatar",
       }}

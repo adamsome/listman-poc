@@ -2,43 +2,46 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { fetchLists } from './actions'
-import ListTiles from '../../components/ListTiles'
-import MainColumns from '../../components/MainColumns'
-import UserProfile from '../../components/UserProfile'
+import UserPage from '../../components/UserPage'
 
 export class Lists extends React.Component {
   componentDidMount() {
-    const { onFetchLists } = this.props
-    onFetchLists()
+    const { userID } = this.props.params
+    // TODO: Should fetch?
+    this.fetchLists(userID)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { userID } = this.props.params
+    if (userID === prevProps.params.userID) return
+    // TODO: Should fetch?
+    this.fetchLists(userID)
+  }
+
+  fetchLists(userID) {
+    const { fetchLists } = this.props
+    fetchLists(userID)
   }
 
   render() {
-    const { lists, user } = this.props
-    return (
-      <div className="container">
-        <MainColumns>
-          <UserProfile user={user} />
-          <ListTiles lists={lists} />
-        </MainColumns>
-      </div>
-    )
+    const { user, lists } = this.props
+    // TODO: get isLoading from state
+    const isLoading = (user) ? false : true
+    return <UserPage user={user} lists={lists} isLoading={isLoading} />
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    lists: state.lists.lists,
-    user: state.lists.user,
+function mapStateToProps(state, ownProps) {
+  const userID = ownProps.params.userID
+  const user = state.users[userID]
+  let lists
+  if (user) {
+    lists = user.lists.map(listID => state.lists[listID])
   }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    onFetchLists: () => dispatch(fetchLists())
-  }
+  return { user, lists }
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { fetchLists },
 )(Lists)

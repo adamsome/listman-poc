@@ -1,23 +1,18 @@
-exports[`test renders correctly 1`] = `
-<div
-  className="container">
-  <MainColumns>
-    <UserProfile
-      user={
-        Object {
-          "avatar": "http://path/to/avatar",
-          "description": "description of user",
-          "username": "test_username",
-        }
-      } />
-    <ListTiles
-      lists={
-        Array [
-          Object {
-            "title": "list title",
-          },
-        ]
-      } />
-  </MainColumns>
-</div>
+exports[`test passes isLoading false when user defined 1`] = `
+<UserPage
+  isLoading={false}
+  lists={
+    Array [
+      Object {
+        "title": "list title",
+      },
+    ]
+  }
+  user={
+    Object {
+      "avatar": "http://path/to/avatar",
+      "description": "description of user",
+      "username": "test_username",
+    }
+  } />
 `;
