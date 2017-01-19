@@ -1,10 +1,10 @@
-exports[`test renders <div> w/ correct children of type <ListTile> 1`] = `
+exports[`test renders <div> w/ correct children of type <Tile> 1`] = `
 <div
   className="columns is-multiline">
   <div
     className="column is-one-quarter">
-    <ListTile
-      title="Test One" />
+    <Tile
+      name="Test One" />
   </div>
 </div>
 `;

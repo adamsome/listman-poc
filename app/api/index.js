@@ -10,19 +10,19 @@ const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
 const fakeUserListsResponse = () => {
   const lists = [{
       id: uuidV4(),
-      title: 'Sample List No. 1 w/ many items',
+      name: 'Sample List No. 1 w/ many items',
     }, {
       id: uuidV4(),
-      title: 'List Two of Samples',
+      name: 'List Two of Samples',
     }, {
       id: uuidV4(),
-      title: 'Third List of Samples with a very, very, long title',
+      name: 'Third List of Samples with a very, very, long name',
     }, {
       id: uuidV4(),
-      title: 'Sample List IV',
+      name: 'Sample List IV',
     }, {
       id: uuidV4(),
-      title: 'Fifth Samples Listing',
+      name: 'Fifth Samples Listing',
   }]
 
   return {
