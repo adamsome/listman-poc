@@ -1,5 +1,6 @@
 import uuidV4 from 'uuid/v4'
 
+const delayMS = 1000
 const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
@@ -38,4 +39,4 @@ const fakeUserListsResponse = () => {
 // TODO: Move normalize to actions
 // TODO: Use real API
 export const fetchUserLists = (userID) =>
-  delay(350).then(() => fakeUserListsResponse())
+  delay(delayMS).then(() => fakeUserListsResponse())

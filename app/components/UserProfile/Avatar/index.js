@@ -1,13 +1,22 @@
 import React from 'react'
 
-const UserProfileAvatar = ({ username, imgSrc }) => (
-  <p className="image is-128x128">
-    <img
-      alt={`${username} Avatar`}
-      src={imgSrc}
-    />
+import './Avatar.scss'
+
+const Avatar = ({ username, imgSrc, isLoading }) => (
+  <p className={
+    "image is-128x128" +
+      ((isLoading) ? " user-profile__avatar--loading" : "")
+  }>
+    {
+      (isLoading)
+        ? null
+        : <img
+            alt={`${username} Avatar`}
+            src={imgSrc}
+          />
+    }
   </p>
 )
 
-export default UserProfileAvatar
+export default Avatar
 

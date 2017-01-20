@@ -2,11 +2,5 @@ exports[`test renders correctly 1`] = `
 <div>
   <section
     className="section" />
-  <Footer>
-    <Container
-      centered={true}>
-      <VersionInfo />
-    </Container>
-  </Footer>
 </div>
 `;

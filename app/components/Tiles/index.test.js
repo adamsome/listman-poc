@@ -7,7 +7,9 @@ import Tile from './Tile'
 
 it('renders null based on initial state (empty "list" array)', () => {
   const wrapper = shallow(<Tiles entities={[]}/>)
-  expect(wrapper.contains(<div>No Items!</div>)).toBe(true)
+  //expect(wrapper.contains(<div>No Items!</div>)).toBe(true)
+  const tiles = wrapper.find(Tile)
+  expect(tiles).toHaveLength(0)
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 

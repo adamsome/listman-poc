@@ -7,19 +7,23 @@ import Column from '../Layout/Columns/Column'
 // Column width out of 12, e.g. 3 => 3/12 => 1/4 => 4 columns per row
 const columnWidth = 3
 // If loading, use blank entity objects as the loading indicator
-const loadingEntities = [ {}, {}, {}, {} ]
+const loadingEntities = Array.from(new Array(8), () => ({}))
 // If no transform passed to get entities' name, use entity.name by default
 const defaultGetEntityName = (entity) => entity.name
 
 // TODO: Add reactProps
-const Tiles = ({ entities = [],
+const Tiles = ({ entities,
                  isLoading,
                  getEntityName = defaultGetEntityName, }) => {
-  const es = (isLoading) ? loadingEntities : entities
+  // TODO: Show error message instead of throwing
+  if (!isLoading && !entities) {
+    throw new Error('Tile enities must be defined unless loading')
+  }
+  const entitiesOrBlank = (isLoading) ? loadingEntities : entities
   return (
     <Columns multiline>
       {
-        es.map((entity, index) => (
+        entitiesOrBlank.map((entity, index) => (
           <Column key={index} widthOutOf12={columnWidth}>
             <Tile name={getEntityName(entity)} isLoading={isLoading} />
           </Column>
