@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { fetchUserLists } from './actions'
+import { getUser, getUserLists } from './selectors'
 import UserPage from '../../components/UserPage'
 
 export class UserLists extends React.Component {
@@ -32,13 +33,10 @@ export class UserLists extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const userID = ownProps.params.userID
-  const user = state.users[userID]
-  let lists
-  if (user) {
-    lists = user.lists.map(listID => state.lists[listID])
+  return {
+    user: getUser(state, ownProps),
+    lists: getUserLists(state, ownProps),
   }
-  return { user, lists }
 }
 
 export default connect(
