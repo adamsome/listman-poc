@@ -1,3 +1,4 @@
+// export default reducer
 export const users = (state = {}, action) => {
   switch (action.type) {
   case 'USER_LISTS_FETCH':
