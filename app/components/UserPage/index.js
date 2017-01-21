@@ -11,6 +11,7 @@ const UserPage = ({ user, lists, isLoading }) => (
       <UserProfile user={user} isLoading={isLoading} />
       <Container spaceAbove>
         <h2 className="title is-2">
+          {/* Handle onLoading */}
           Lists
         </h2>
         <Tiles entities={lists} isLoading={isLoading} />

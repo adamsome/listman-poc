@@ -1,10 +1,10 @@
 export const users = (state = {}, action) => {
   switch (action.type) {
-  case 'USER_LISTS_RECEIVE':
-    if (action.response) {
+  case 'USER_LISTS_FETCH':
+    if (action.status === 'success' && action.payload) {
       return {
         ...state,
-        ...action.response.entities.users,
+        ...action.payload.entities.users,
       }
     }
     return state
@@ -15,11 +15,11 @@ export const users = (state = {}, action) => {
 
 export const lists = (state = {}, action) => {
   switch (action.type) {
-  case 'USER_LISTS_RECEIVE':
-    if (action.response) {
+  case 'USER_LISTS_FETCH':
+    if (action.status === 'success' && action.payload) {
       return {
         ...state,
-        ...action.response.entities.lists,
+        ...action.payload.entities.lists,
       }
     }
     return state
@@ -38,11 +38,11 @@ export const lists = (state = {}, action) => {
 
 export const isLoading = (state = false, action) => {
   switch (action.type) {
-  case 'USER_LISTS_REQUEST':
+  case 'USER_LISTS_FETCH':
+    if (action.status === 'success' || action.status === 'error') {
+      return false
+    }
     return true
-  case 'USER_LISTS_RECEIVE':
-  case 'USER_LISTS_FAILURE':
-    return false
   default:
     return state
   }
@@ -50,10 +50,10 @@ export const isLoading = (state = false, action) => {
 
 export const error = (state = null, action) => {
   switch (action.type) {
-  case 'USER_LISTS_FAILURE':
-    return action.errorMessage
-  case 'USER_LISTS_REQUEST':
-  case 'USER_LISTS_RECEIVE':
+  case 'USER_LISTS_FETCH':
+    if (action.status === 'error') {
+      return action.payload
+    }
     return null
   default:
     return state
