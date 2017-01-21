@@ -39,4 +39,10 @@ const fakeUserListsResponse = () => {
 // TODO: Move normalize to actions
 // TODO: Use real API
 export const fetchUserLists = (userID) =>
-  delay(delayMS).then(() => fakeUserListsResponse())
+delay(delayMS).then(() => {
+  if (userID === "adamsome") {
+    return fakeUserListsResponse()
+  }
+  throw new Error(`User ${userID} was not found.`)
+})
+
