@@ -1,8 +1,12 @@
 exports[`test renders correctly 1`] = `
-<section
-  className="not-found">
-  <h1>
-    Page Not Found!
-  </h1>
-</section>
+<Container>
+  <MainColumns>
+    <h1
+      className="title is-1">
+      Page not found!
+    </h1>
+    <p
+      className="subtitle is-5" />
+  </MainColumns>
+</Container>
 `;

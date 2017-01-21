@@ -24,3 +24,7 @@ export const getUserLists = (state, props) => {
 export const getIsLoading = (state) => {
   return state.isLoading
 }
+
+export const getError = (state) => {
+  return state.error
+}

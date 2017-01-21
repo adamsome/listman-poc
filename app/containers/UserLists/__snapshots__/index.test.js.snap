@@ -1,4 +1,9 @@
-exports[`test passes isLoading false when user defined 1`] = `
+exports[`test renders <NotFound> on error 1`] = `
+<NotFound
+  error="User not found" />
+`;
+
+exports[`test renders correctly 1`] = `
 <UserPage
   isLoading={false}
   lists={

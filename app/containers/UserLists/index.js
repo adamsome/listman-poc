@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { fetchUserLists } from './actions'
-import { getUser, getUserLists, getIsLoading } from './selectors'
+import { getUser, getUserLists, getIsLoading, getError } from './selectors'
 import UserPage from '../../components/UserPage'
+import NotFound from '../../components/NotFound'
 
 export class UserLists extends React.Component {
   componentDidMount() {
@@ -25,8 +26,10 @@ export class UserLists extends React.Component {
   }
 
   render() {
-    const { user, lists, isLoading } = this.props
-    return <UserPage user={user} lists={lists} isLoading={isLoading} />
+    const { user, lists, isLoading, error } = this.props
+    return (error)
+      ? <NotFound error={error} />
+      : <UserPage user={user} lists={lists} isLoading={isLoading} />
   }
 }
 
@@ -35,6 +38,7 @@ function mapStateToProps(state, ownProps) {
     user: getUser(state, ownProps),
     lists: getUserLists(state, ownProps),
     isLoading: getIsLoading(state),
+    error: getError(state),
   }
 }
 

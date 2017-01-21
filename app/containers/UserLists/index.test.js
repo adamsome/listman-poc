@@ -4,10 +4,12 @@ import toJson from 'enzyme-to-json'
 
 import { UserLists } from './index'
 import UserPage from '../../components/UserPage'
+import NotFound from '../../components/NotFound'
 
-it('passes isLoading false when user defined', () => {
+it('renders correctly', () => {
   const wrapper = shallow(
     <UserLists
+      isLoading={false}
       user={{
         username: "test_username",
         description: "description of user",
@@ -18,15 +20,16 @@ it('passes isLoading false when user defined', () => {
       ]}
     />
   )
+  expect(wrapper.find(UserPage)).toHaveLength(1)
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
-it('passes isLoading true when user undefined', () => {
+it('renders <NotFound> on error', () => {
   const wrapper = shallow(
-    <UserLists />
+    <UserLists error="User not found"/>
   )
-  const child = wrapper.find(UserPage).first()
-  expect(child.props().isLoading).toBe(true)
+  expect(wrapper.find(NotFound)).toHaveLength(1)
+  expect(toJson(wrapper)).toMatchSnapshot()
 })
 
 it('fetches on mount', () => {
