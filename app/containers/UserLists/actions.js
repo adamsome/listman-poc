@@ -1,6 +1,6 @@
 import { normalize } from 'normalizr'
 
-import * as api from '../../api'
+import { getIsLoading } from './selectors'
 import { userListsSchema } from '../../api/schemas'
 
 const requestUserLists = (userID) => ({
@@ -13,7 +13,11 @@ const receiveUserLists = (response) => ({
   response,
 })
 
-export const fetchUserLists = (userID) => (dispatch) => {
+export const fetchUserLists = (userID) => (dispatch, getState, api) => {
+  if (getIsLoading(getState())) {
+    return Promise.resolve()
+  }
+
   dispatch(requestUserLists(userID))
 
   return api.fetchUserLists(userID)

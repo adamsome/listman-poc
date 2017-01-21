@@ -4,8 +4,12 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
 import reducer from './reducer'
+import * as api from './api'
 
-const middleware = [ promiseMiddleware, thunk ]
+const middleware = [
+  promiseMiddleware,
+  thunk.withExtraArgument(api)
+]
 
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
