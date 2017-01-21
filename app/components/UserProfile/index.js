@@ -47,10 +47,6 @@ const renderProfile = (user, isLoading) => (
 )
 
 const UserProfile = ({ user, isLoading }) => {
-  // TODO: Show error message instead of throwing
-  if (!isLoading && !user) {
-    throw new Error('Tile enities must be defined unless loading')
-  }
   // TODO: Refactor, new fn passing userOrBlank properties & class to render
   const userOrBlank = user || loadingUser
   // TODO: PICKUP render loading for title/desc and menu

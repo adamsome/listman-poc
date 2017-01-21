@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { fetchUserLists } from './actions'
-import { getUser, getUserLists } from './selectors'
+import { getUser, getUserLists, getIsLoading } from './selectors'
 import UserPage from '../../components/UserPage'
 
 export class UserLists extends React.Component {
@@ -25,9 +25,7 @@ export class UserLists extends React.Component {
   }
 
   render() {
-    const { user, lists } = this.props
-    // TODO: get isLoading from state
-    const isLoading = (user) ? false : true
+    const { user, lists, isLoading } = this.props
     return <UserPage user={user} lists={lists} isLoading={isLoading} />
   }
 }
@@ -36,6 +34,7 @@ function mapStateToProps(state, ownProps) {
   return {
     user: getUser(state, ownProps),
     lists: getUserLists(state, ownProps),
+    isLoading: getIsLoading(state),
   }
 }
 

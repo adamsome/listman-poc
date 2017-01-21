@@ -3,12 +3,22 @@ import { normalize } from 'normalizr'
 import * as api from '../../api'
 import { userListsSchema } from '../../api/schemas'
 
-const receiveUserLists = (res) => ({
-  type: 'USER_LISTS_RECEIVE',
-  res,
+const requestUserLists = (userID) => ({
+  type: 'USER_LISTS_REQUEST',
+  userID,
 })
 
-export const fetchUserLists = (userID) =>
-  api.fetchUserLists(userID).then(res =>
-    receiveUserLists(normalize(res, userListsSchema))
-  )
+const receiveUserLists = (response) => ({
+  type: 'USER_LISTS_RECEIVE',
+  response,
+})
+
+export const fetchUserLists = (userID) => (dispatch) => {
+  dispatch(requestUserLists(userID))
+
+  return api.fetchUserLists(userID)
+    .then(response => normalize(response, userListsSchema))
+    .then(response => {
+      dispatch(receiveUserLists(response))
+    })
+}

@@ -18,3 +18,7 @@ export const getUserLists = (state, props) => {
     ? user.lists.map(listID => lists[listID])
     : undefined
 }
+
+export const getIsLoading = (state) => {
+  return state.isLoading
+}

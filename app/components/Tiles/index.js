@@ -15,11 +15,7 @@ const defaultGetEntityName = (entity) => entity.name
 const Tiles = ({ entities,
                  isLoading,
                  getEntityName = defaultGetEntityName, }) => {
-  // TODO: Show error message instead of throwing
-  if (!isLoading && !entities) {
-    throw new Error('Tile enities must be defined unless loading')
-  }
-  const entitiesOrBlank = (isLoading) ? loadingEntities : entities
+  const entitiesOrBlank = (isLoading) ? loadingEntities : entities || []
   return (
     <Columns multiline>
       {

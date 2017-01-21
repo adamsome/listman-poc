@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import { users, lists } from './containers/UserLists/reducer'
+import * as userLists from './containers/UserLists/reducer'
 
 export default combineReducers({
-  users,
-  lists,
+  ...userLists,
   routing: routerReducer
 })
