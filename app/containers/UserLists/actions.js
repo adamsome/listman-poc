@@ -1,6 +1,7 @@
 import { normalize } from 'normalizr'
 
-import { getUser, getUserID, getIsLoading, getError } from './selectors'
+import * as fromApp from '../../reducers'
+import * as fromUsers from '../../reducers/users'
 import { userListsSchema } from '../../api/schemas'
 
 const fetchAction = (type, userID, status, payload) => ({
@@ -24,11 +25,11 @@ const fetchUserLists = (userID) => (dispatch, getState, api) => {
     })
 }
 
-const shouldFetchUserLists = (state, props) => {
-  const user = getUser(state, props)
-  if (!user || getError(state)) {
+const shouldFetchUserLists = (state, userID) => {
+  const user = fromUsers.getUser(fromApp.getUsers(state), userID)
+  if (!user || fromApp.getListsByUserError(state, userID)) {
     return true
-  } else if (getIsLoading(state)) {
+  } else if (fromApp.getListsByUserIsLoading(state, userID)) {
     return false
   } else {
     // TODO: Support userList invalidation (i.e. `return user.didInvalidate`)
@@ -36,10 +37,8 @@ const shouldFetchUserLists = (state, props) => {
   }
 }
 
-export const fetchUserListsIfNeeded = (props) => (dispatch, getState) => {
-  const state = getState()
-  if (shouldFetchUserLists(state, props)) {
-    const userID = getUserID(state, props)
+export const fetchUserListsIfNeeded = (userID) => (dispatch, getState) => {
+  if (shouldFetchUserLists(getState(), userID)) {
     return dispatch(fetchUserLists(userID))
   } else {
     return Promise.resolve()
