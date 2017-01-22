@@ -7,7 +7,7 @@ import Column from '../Layout/Columns/Column'
 // Column width out of 12, e.g. 3 => 3/12 => 1/4 => 4 columns per row
 const columnWidth = 3
 // If loading, use blank entity objects as the loading indicator
-const loadingEntities = Array.from(new Array(8), () => ({}))
+const loadingEntities = Array.from(new Array(7), () => ({}))
 // If no transform passed to get entities' name, use entity.name by default
 const defaultGetEntityName = (entity) => entity.name
 
@@ -15,7 +15,7 @@ const defaultGetEntityName = (entity) => entity.name
 const Tiles = ({ entities,
                  isLoading,
                  getEntityName = defaultGetEntityName, }) => {
-  const entitiesOrBlank = (isLoading) ? loadingEntities : entities || []
+  const entitiesOrBlank = (isLoading || !entities) ? loadingEntities : entities
   return (
     <Columns multiline>
       {

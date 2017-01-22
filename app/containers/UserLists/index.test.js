@@ -36,7 +36,7 @@ it('fetches on mount', () => {
   const mockFetch = jest.fn()
   const wrapper = mount(
     <UserLists
-      fetchUserLists={mockFetch}
+      fetchUserListsIfNeeded={mockFetch}
       params={{userID: "test_username"}}
       user={{
         username: "test_username",

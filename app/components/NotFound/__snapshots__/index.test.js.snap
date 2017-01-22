@@ -1,12 +1,10 @@
 exports[`test renders correctly 1`] = `
-<Container>
-  <MainColumns>
-    <h1
-      className="title is-1">
-      Page not found!
-    </h1>
-    <p
-      className="subtitle is-5" />
-  </MainColumns>
-</Container>
+<MainColumns>
+  <h1
+    className="title is-1">
+    Page not found!
+  </h1>
+  <p
+    className="subtitle is-5" />
+</MainColumns>
 `;

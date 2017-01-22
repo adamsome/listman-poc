@@ -8,7 +8,7 @@ const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
                    'Praesent cursus pretium leo, sit amet dignissim felis ' +
                    'vulputate at.'
 
-const fakeUserListsResponse = () => {
+const fakeUserListsResponse = (userID) => {
   const lists = [{
       id: uuidV4(),
       name: 'Sample List No. 1 w/ many items',
@@ -26,23 +26,30 @@ const fakeUserListsResponse = () => {
       name: 'Fifth Samples Listing',
   }]
 
-  return {
-    id: "adamsome",
-    description: loremIpsum,
-    avatar: 'http://bulma.io/images/placeholders/256x256.png',
-    lists,
+  const users = {
+    adamsome: {
+      id: "adamsome",
+      description: loremIpsum,
+      avatar: 'http://bulma.io/images/placeholders/256x256.png',
+      lists,
+    },
+    "other-user": {
+      id: "other-user",
+      description: loremIpsum,
+      avatar: 'http://bulma.io/images/placeholders/256x256.png',
+      lists: lists.slice(1, 3),
+    }
   }
+  return users[userID]
 }
 
-// Normalizr user lists schema
-
-// TODO: Move normalize to actions
 // TODO: Use real API
 export const fetchUserLists = (userID) =>
 delay(delayMS).then(() => {
-  if (userID === "adamsome") {
-    return fakeUserListsResponse()
-  }
+  const response = fakeUserListsResponse(userID)
+  if (response) {
+    return response
+  } 
   throw new Error(`User ${userID} was not found.`)
 })
 

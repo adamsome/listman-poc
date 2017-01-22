@@ -1,28 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { fetchUserLists } from './actions'
-import { getUser, getUserLists, getIsLoading, getError } from './selectors'
+import { fetchUserListsIfNeeded } from './actions'
+import * as select from './selectors'
 import UserPage from '../../components/UserPage'
 import NotFound from '../../components/NotFound'
 
 export class UserLists extends React.Component {
   componentDidMount() {
-    const { userID } = this.props.params
-    // TODO: Should fetch?
-    this.fetchUserLists(userID)
+    this.fetchUserLists()
   }
 
   componentDidUpdate(prevProps) {
-    const { userID } = this.props.params
-    if (userID === prevProps.params.userID) return
-    // TODO: Should fetch?
-    this.fetchUserLists(userID)
+    // Fetch if user changed (or if previous user was undefined)
+    const { userID } = this.props
+    const prevUserID = prevProps.userID
+    if (userID !== prevUserID) {
+      console.log(`<UserLists> update fetch` +
+                  `(user ${userID} != prevUser ${prevUserID})`)
+      this.fetchUserLists()
+    }
   }
 
-  fetchUserLists(userID) {
-    const { fetchUserLists } = this.props
-    fetchUserLists(userID)
+  fetchUserLists() {
+    this.props.fetchUserListsIfNeeded(this.props)
   }
 
   render() {
@@ -33,16 +34,15 @@ export class UserLists extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    user: getUser(state, ownProps),
-    lists: getUserLists(state, ownProps),
-    isLoading: getIsLoading(state),
-    error: getError(state),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  userID: select.getUserID(state, ownProps),
+  user: select.getUser(state, ownProps),
+  lists: select.getUserLists(state, ownProps),
+  isLoading: select.getIsLoading(state),
+  error: select.getError(state),
+})
 
 export default connect(
   mapStateToProps,
-  { fetchUserLists },
+  { fetchUserListsIfNeeded },
 )(UserLists)

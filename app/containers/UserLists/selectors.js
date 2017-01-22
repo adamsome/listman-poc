@@ -6,10 +6,10 @@ const getLists = (state) => {
   return state.lists
 }
 
-const getUserRoute = (state, props) => props.params.userID
+export const getUserID = (state, props) => props.params.userID
 
 export const getUser = (state, props) => {
-  const userID = getUserRoute(state, props)
+  const userID = getUserID(state, props)
   return getUsers(state)[userID]
 }
 

@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import * as userLists from './containers/UserLists/reducer'
+import { users, lists, isLoading, error } from './containers/UserLists/reducer'
 
 export default combineReducers({
-  ...userLists,
+  users,
+  lists,
+  isLoading,
+  error,
   routing: routerReducer
 })
