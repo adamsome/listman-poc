@@ -11,7 +11,7 @@ const fetchAction = (type, userID, status, payload) => ({
   payload,
 })
 
-const fetchUserLists = (userID) => (dispatch, getState, api) => {
+export const fetchUserLists = (userID) => (dispatch, getState, api) => {
   const type = 'USER_LISTS_FETCH'
   dispatch(fetchAction(type, userID))
   return api.fetchUserLists(userID)

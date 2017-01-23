@@ -5,38 +5,34 @@ import toJson from 'enzyme-to-json'
 import reducer from './listsByUser'
 
 const action = 'USER_LISTS_FETCH'
-const makeRequestAction = (type, userID) => ({
+const makeAction = (type, user, status, payload) => ({
   type,
-  userID,
-  // Extraneous, should be ignored
-  payload: {entities: {users: {[userID]: {lists: [1, 2]}}}}
-})
-const makeErrorAction = (type, userID, err) => ({
-  type,
-  userID,
-  status: 'error',
-  payload: err
-})
-const makeAction = (type, status, user) => ({
-  type,
-  status,
   userID: user.id,
-  payload: {
+  status,
+  // If no payload, generate automatically
+  payload: (status && payload) ? payload : {
     entities: {
-      users: {
-        [user.id]: user,
-      }
-    }
-  }
+      users: { [user.id]: user },
+      lists,
+    },
+  },
 })
-const user1 = {
-  id: 'username',
+const users = [{
+  id: 'other-user',
   description: 'a description',
   avatar: 'http://path/to/avatar',
-  lists: [1, 2, 3],
+}]
+const lists = {
+  '0': { id: '0', name: 'List1' },
+  '1': { id: '1', name: 'List2' },
+  '3': { id: '3', name: 'List3' },
 }
-const existingState1 = {
-  lists: [4, 2, 9],
+const user1 = {
+  ...users[0],
+  lists: Object.keys(lists),
+}
+const existingState = {
+  lists: ['4', '2', '9'],
   isLoading: false,
   error: "message",
 }
@@ -46,8 +42,10 @@ it('returns initial state', () => {
 })
 
 it('should return loading when no status given', () => {
-  expect(reducer({}, makeRequestAction(action, user1.id))).toEqual({
-    [user1.id]: {
+  expect(
+    reducer({}, makeAction(action, user1))
+  ).toEqual({
+    [users[0].id]: {
       lists: undefined,
       isLoading: true,
       error: null,
@@ -56,8 +54,10 @@ it('should return loading when no status given', () => {
 })
 
 it('should return error & no loading when error status given', () => {
-  expect(reducer({}, makeErrorAction(action, user1.id, 'err'))).toEqual({
-    [user1.id]: {
+  expect(
+    reducer({}, makeAction(action, user1, 'error', 'err'))
+  ).toEqual({
+    [users[0].id]: {
       lists: undefined,
       isLoading: false,
       error: 'err',
@@ -66,7 +66,10 @@ it('should return error & no loading when error status given', () => {
 })
 
 it('should include user lists on success', () => {
-  expect(reducer({}, makeAction(action, 'success', user1))).toEqual({
+
+  expect(
+    reducer({}, makeAction(action, user1, 'success'))
+  ).toEqual({
     [user1.id]: {
       lists: user1.lists,
       isLoading: false,
@@ -75,9 +78,27 @@ it('should include user lists on success', () => {
   })
 
   expect(
-    reducer({existing: existingState1}, makeAction(action, 'success', user1))
+    reducer(
+      {existingState},
+      makeAction(action, user1, 'success')
+    )
   ).toEqual({
-    existing: existingState1,
+    existingState,
+    [user1.id]: {
+      lists: user1.lists,
+      isLoading: false,
+      error: null,
+    }
+  })
+})
+
+it('should replace existing user list', () => {
+  expect(
+    reducer(
+      {[user1.id]: existingState},
+      makeAction(action, user1, 'success')
+    )
+  ).toEqual({
     [user1.id]: {
       lists: user1.lists,
       isLoading: false,
