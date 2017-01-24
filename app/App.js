@@ -27,6 +27,10 @@ export default class App extends React.Component {
                 <br />
                 <Link to='/other-user'>/other-user</Link>
                 <br />
+                <Link to='/long-maximum-length-user-name-32'>
+                  /long-maximum-length-user-name-32
+                </Link>
+                <br />
                 <Link to='/not-a-user'>/not-a-user</Link>
               </Column>
             </Columns>

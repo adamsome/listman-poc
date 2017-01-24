@@ -32,6 +32,13 @@ exports[`test renders correctly 1`] = `
           <Link
             onlyActiveOnIndex={false}
             style={Object {}}
+            to="/long-maximum-length-user-name-32">
+            /long-maximum-length-user-name-32
+          </Link>
+          <br />
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
             to="/not-a-user">
             /not-a-user
           </Link>

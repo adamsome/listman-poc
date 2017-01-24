@@ -25,6 +25,9 @@ const Tiles = ({ entities,
           </Column>
         ))
       }
+      <Column key="add" widthOutOf12={columnWidth}>
+        <Tile name="+" />
+      </Column>
     </Columns>
   )
 }

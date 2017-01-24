@@ -6,17 +6,21 @@ import Tiles from './index'
 import Tile from './Tile'
 
 it('renders null based on initial state (empty "list" array)', () => {
-  const wrapper = shallow(<Tiles entities={[]}/>)
+  const entities = []
+  const wrapper = shallow(<Tiles entities={entities}/>)
   //expect(wrapper.contains(<div>No Items!</div>)).toBe(true)
   const tiles = wrapper.find(Tile)
-  expect(tiles).toHaveLength(0)
+  // Expect one more to include Add tile
+  expect(tiles).toHaveLength(entities.length + 1)
   expect(toJson(wrapper)).toMatchSnapshot()
 })
 
 it('renders <div> w/ correct children of type <Tile>', () => {
   const name = 'Test One'
-  const wrapper = shallow(<Tiles entities={[ { name } ]}/>)
-  expect(wrapper.find(Tile)).toHaveLength(1)
+  const entities = [ { name } ]
+  const wrapper = shallow(<Tiles entities={entities}/>)
+  // Expect one more to include Add tile
+  expect(wrapper.find(Tile)).toHaveLength(entities.length + 1)
 
   const child = wrapper.find(Tile).first()
   const childProps = child.props()

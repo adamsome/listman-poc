@@ -8,14 +8,11 @@ const lists = (state = {}, action) => {
       }
     }
     return state
-  //case 'ADD_LIST':
-    //return {
-      //...state,
-      //lists: [
-        //...state.lists,
-        //action.list,
-      //]
-    //}
+  case 'ADD_LIST':
+    return {
+      ...state,
+      [action.list.id]: action.list,
+    }
   default:
     return state
   }

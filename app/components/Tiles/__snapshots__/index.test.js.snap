@@ -6,10 +6,21 @@ exports[`test renders <div> w/ correct children of type <Tile> 1`] = `
     <Tile
       name="Test One" />
   </Column>
+  <Column
+    widthOutOf12={3}>
+    <Tile
+      name="+" />
+  </Column>
 </Columns>
 `;
 
 exports[`test renders null based on initial state (empty "list" array) 1`] = `
 <Columns
-  multiline={true} />
+  multiline={true}>
+  <Column
+    widthOutOf12={3}>
+    <Tile
+      name="+" />
+  </Column>
+</Columns>
 `;
