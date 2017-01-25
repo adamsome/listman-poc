@@ -5,4 +5,4 @@ const userListsSchema = new schema.Entity('users', {
   lists: [ listSchema ]
 })
 
-export { userListsSchema }
+export { listSchema, userListsSchema }

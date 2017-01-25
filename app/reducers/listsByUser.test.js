@@ -2,16 +2,14 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-import { makeMockDB } from '../api/mockDB'
+import db from '../api/mockDB'
 import reducer from './listsByUser'
 
-const db = makeMockDB()
 const user = {
   ...db.users['adamsome'],
   lists: db.userLists['adamsome']
 }
 const lists = db.lists
-console.log('user', user)
 
 const existingState = {
   lists: ['4', '2', '9'],
@@ -19,7 +17,7 @@ const existingState = {
   error: "message",
 }
 
-const action = 'USER_LISTS_FETCH'
+const action = 'FETCH_USER_LISTS'
 const makeAction = (type, user, status, payload) => ({
   type,
   userID: user.id,
@@ -42,7 +40,7 @@ it('should return loading when no status given', () => {
     reducer({}, makeAction(action, user))
   ).toEqual({
     [user.id]: {
-      lists: undefined,
+      lists: [],
       isLoading: true,
       error: null,
     }
@@ -54,7 +52,7 @@ it('should return error & no loading when error status given', () => {
     reducer({}, makeAction(action, user, 'error', 'err'))
   ).toEqual({
     [user.id]: {
-      lists: undefined,
+      lists: [],
       isLoading: false,
       error: 'err',
     }

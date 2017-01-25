@@ -1,39 +1,63 @@
-const isLoading = (action) => {
-  if (action.status === 'success' ||
-      action.status === 'error') {
-    return false
+const isLoading = (state = false, action) => {
+  switch (action.type) {
+  case 'FETCH_USER_LISTS':
+    return !action.status
+  default:
+    return state
   }
-  return true
 }
 
-const error = (action) => {
-  if (action.status === 'error') {
-    return action.payload
+const error = (state = null, action) => {
+  switch (action.type) {
+  case 'FETCH_USER_LISTS':
+    if (action.status === 'error') {
+      return action.payload
+    }
+    return null
+  default:
+    return state
   }
-  return null
 }
 
 // Store user -> lists here
-const lists = (action) => {
-  if (action.status === 'success') {
-    return action.payload.entities.users[action.userID].lists
+const lists = (state = [], action) => {
+  const { type, status, payload } = action
+  switch (type) {
+  case 'FETCH_USER_LISTS':
+    if (status === 'success') {
+      return payload.entities.users[action.userID].lists
+    }
+    return state
+  case 'ADD_LIST':
+    if (status === 'success') {
+      return [
+        ...state,
+        payload.result,
+      ]
+    }
+    return state
+  default:
+    return state
+  }
+}
+
+const listsByUserEntry = (state = {}, action) => {
+  return {
+    lists: lists(state.lists, action),
+    isLoading: isLoading(state.isLoading, action),
+    error: error(state.error, action),
   }
 }
 
 const listsByUser = (state = {}, action) => {
-  switch (action.type) {
-  case 'USER_LISTS_FETCH':
+  const { userID } = action
+  if (userID) {
     return {
       ...state,
-      [action.userID]: {
-        lists: lists(action),
-        isLoading: isLoading(action),
-        error: error(action),
-      }
+      [userID]: listsByUserEntry(state[userID], action),
     }
-  default:
-    return state
   }
+  return state
 }
 
 export default listsByUser

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as fromApp from '../../reducers'
 import * as fromUsers from '../../reducers/users'
-import { fetchUserListsIfNeeded } from './actions'
+import { fetchUserListsIfNeeded, addList } from './actions'
 import UserPage from '../../components/UserPage'
 import NotFound from '../../components/NotFound'
 
@@ -49,6 +49,6 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { fetchUserListsIfNeeded },
+  { fetchUserListsIfNeeded, addList },
 )(UserLists)
 

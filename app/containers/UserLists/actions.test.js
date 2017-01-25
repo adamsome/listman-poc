@@ -32,12 +32,12 @@ asyncTest({
   params: [users[0].id],
   mockAPI: api,
   expectedActions: [{
-      type: "USER_LISTS_FETCH",
+      type: "FETCH_USER_LISTS",
       userID: users[0].id,
       status: undefined,
       payload: undefined,
     }, {
-      type: "USER_LISTS_FETCH",
+      type: "FETCH_USER_LISTS",
       userID: users[0].id,
       status: 'success',
       payload: {
@@ -64,12 +64,12 @@ asyncTest({
   params: [users[0].id],
   mockAPI: api,
   expectedActions: [{
-      type: "USER_LISTS_FETCH",
+      type: "FETCH_USER_LISTS",
       userID: users[0].id,
       status: undefined,
       payload: undefined,
     }, {
-      type: "USER_LISTS_FETCH",
+      type: "FETCH_USER_LISTS",
       userID: users[0].id,
       status: 'success',
       payload: {

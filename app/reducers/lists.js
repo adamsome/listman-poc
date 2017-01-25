@@ -1,7 +1,7 @@
 const lists = (state = {}, action) => {
   switch (action.type) {
-  case 'USER_LISTS_FETCH':
-    if (action.status === 'success' && action.payload) {
+  case 'FETCH_USER_LISTS':
+    if (action.status === 'success') {
       return {
         ...state,
         ...action.payload.entities.lists,
@@ -9,10 +9,13 @@ const lists = (state = {}, action) => {
     }
     return state
   case 'ADD_LIST':
-    return {
-      ...state,
-      [action.list.id]: action.list,
+    if (action.status === 'success') {
+      return {
+        ...state,
+        ...action.payload.entities.lists,
+      }
     }
+    return state
   default:
     return state
   }

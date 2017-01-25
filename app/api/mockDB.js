@@ -71,11 +71,51 @@ export const userListsByID = Object.keys(userListsByIndex).reduce((acc, i) => {
   return acc
 }, {})
 
-export const makeMockDB = () => {
-  return {
-    users: usersByID,
-    lists: listsByID,
-    userLists: userListsByID,
+class DB {
+  constructor(users, lists, userLists) {
+    this.users = users
+    this.lists = lists
+    this.userLists = userLists
+
+    this.debug = process.env.NODE_ENV === 'development'
+  }
+
+  logDB() {
+    if (this.debug) console.log('DB', this)
+  }
+
+  log() {
+    if (this.debug) console.log.apply(this, arguments)
+  }
+
+  getUserLists(userID) {
+    if (!this.users[userID]) {
+      throw new Error(`User ${userID} was not found.`)
+    }
+    const userLists = {
+      ...this.users[userID],
+      lists: this.userLists[userID].map(listID => this.lists[listID])
+    }
+    this.log('api-get-user-list', userLists)
+    return userLists
+  }
+
+  addList(userID, name) {
+    if (!this.users[userID]) {
+      throw new Error(`User ${userID} was not found.`)
+    }
+    if (!name) {
+      throw new Error(`List name must not be blank.`)
+    }
+    const id = uuidV4()
+    const list = { id, name, author: userID }
+    this.lists = { ...this.lists, [id]: list }
+    this.userLists[userID] = [...this.userLists[userID], id]
+    this.log('api-add-lists', list)
+    return list
   }
 }
+
+const db = new DB(usersByID, listsByID, userListsByID)
+export default db
 

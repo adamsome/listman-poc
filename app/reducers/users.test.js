@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import reducer from './users'
 
-const action = 'USER_LISTS_FETCH'
+const action = 'FETCH_USER_LISTS'
 const makeAction = (type, status, user) => ({
   type,
   status,
@@ -38,13 +38,13 @@ it('returns initial state', () => {
   expect(reducer(undefined, {})).toEqual({})
 })
 
-it('should do nothing on USER_LISTS_FETCH w/ non-success status', () => {
+it('should do nothing on FETCH_USER_LISTS w/ non-success status', () => {
   expect(
     reducer({}, makeAction(action, 'not-success', user1))
   ).toEqual({})
 })
 
-it('returns a new user on USER_LISTS_FETCH w/ success', () => {
+it('returns a new user on FETCH_USER_LISTS w/ success', () => {
   expect(
     reducer({}, makeAction(action, 'success', user1))
   ).toEqual({

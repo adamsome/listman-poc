@@ -9,7 +9,7 @@ const user = (action) => {
 
 const users = (state = {}, action) => {
   switch (action.type) {
-  case 'USER_LISTS_FETCH':
+  case 'FETCH_USER_LISTS':
     if (action.status === 'success' && action.payload) {
       return {
         ...state,
