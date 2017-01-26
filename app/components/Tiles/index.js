@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Tile from './Tile'
+import AddTile from './Tile/AddTile'
 import Columns from '../Layout/Columns'
 import Column from '../Layout/Columns/Column'
 
@@ -11,10 +12,9 @@ const loadingEntities = Array.from(new Array(7), () => ({}))
 // If no transform passed to get entities' name, use entity.name by default
 const defaultGetEntityName = (entity) => entity.name
 
-// TODO: Add reactProps
-const Tiles = ({ entities,
-                 isLoading,
+const Tiles = ({ entities, isLoading, isAdding, add,
                  getEntityName = defaultGetEntityName, }) => {
+
   const entitiesOrBlank = (isLoading || !entities) ? loadingEntities : entities
   return (
     <Columns multiline>
@@ -25,9 +25,12 @@ const Tiles = ({ entities,
           </Column>
         ))
       }
-      <Column key="add" widthOutOf12={columnWidth}>
-        <Tile name="+" />
-      </Column>
+      {
+        (isLoading) ? null :
+          <Column key="add" widthOutOf12={columnWidth}>
+            <AddTile isLoading={isLoading} isAdding={isAdding} add={add} />
+          </Column>
+      }
     </Columns>
   )
 }

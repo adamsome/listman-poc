@@ -12,7 +12,6 @@ export default combineReducers({
   routing: routerReducer
 })
 
-export const getCurrentUserID = (_, props) => props.params.userID
 export const getUsers = (state) => state.users
 export const getLists = (state) => state.lists
 export const getUserLists = (state) => state.listsByUser
@@ -29,4 +28,10 @@ export const getListsByUserIsLoading = (state, userID) =>
 
 export const getListsByUserError = (state, userID) =>
   fromListsByUser.getError(getUserLists(state), userID)
+
+export const getListsByUserIsAdding = (state, userID) =>
+  fromListsByUser.getIsAdding(getUserLists(state), userID)
+
+export const getListsByUserAddError = (state, userID) =>
+  fromListsByUser.getAddError(getUserLists(state), userID)
 

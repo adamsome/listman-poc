@@ -29,21 +29,31 @@ export class UserLists extends React.Component {
   }
 
   render() {
-    const { user, lists, isLoading, error } = this.props
+    const { userID, user, lists, isLoading,
+            error, isAdding, addError, addList } = this.props
     return (error)
       ? <NotFound error={error} />
-      : <UserPage user={user} lists={lists} isLoading={isLoading} />
+      : <UserPage
+          user={user}
+          lists={lists}
+          isLoading={isLoading}
+          isAdding={isAdding}
+          addError={addError}
+          addList={(name) => addList(userID, name)}
+        />
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const userID = fromApp.getCurrentUserID(state, ownProps)
+  const userID = ownProps.params.userID
   return {
     userID,
     user: fromUsers.getUser(fromApp.getUsers(state), userID),
     lists: fromApp.getListsByUser(state, userID),
     isLoading: fromApp.getListsByUserIsLoading(state, userID),
     error: fromApp.getListsByUserError(state, userID),
+    isAdding: fromApp.getListsByUserIsAdding(state, userID),
+    addError: fromApp.getListsByUserAddError(state, userID),
   }
 }
 

@@ -45,8 +45,7 @@ export const fetchUserListsIfNeeded = (userID) => (dispatch, getState) => {
 
 export const addList = (userID, name) => (dispatch, _, api) => {
   const type = 'ADD_LIST'
-  // TODO: Dispatch request (optimistic)
-  //dispatch
+  dispatch({ type, userID })
   return api.addList(userID, name)
     .then(response => {
       const payload = normalize(response, listSchema)
