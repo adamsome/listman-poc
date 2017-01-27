@@ -31,6 +31,7 @@ const makeAction = (type, user, status, payload) => ({
       users: { [user.id]: user },
       lists,
     },
+    result: user.lists
   },
 })
 

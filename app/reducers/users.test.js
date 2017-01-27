@@ -27,12 +27,6 @@ const user2 = {
   description: 'other description',
   avatar: 'http://path/to/other/avatar',
 }
-const userWithLists = {
-  id: 'other-user',
-  description: 'other description',
-  avatar: 'http://path/to/other/avatar',
-  lists: [1, 2, 3],
-}
 
 it('returns initial state', () => {
   expect(reducer(undefined, {})).toEqual({})
@@ -59,15 +53,5 @@ it('returns a new user on FETCH_USER_LISTS w/ success', () => {
   ).toEqual({
     [user2.id]: user2,
     [user1.id]: user1,
-  })
-})
-
-it('does not store the user lists key', () => {
-  const userWithoutLists = { ...userWithLists }
-  delete userWithoutLists.lists
-  expect(
-    reducer({}, makeAction(action, 'success', userWithLists))
-  ).toEqual({
-    [userWithLists.id]: userWithoutLists,
   })
 })

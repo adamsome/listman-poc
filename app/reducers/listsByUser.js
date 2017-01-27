@@ -6,7 +6,8 @@ const lists = (state = [], action) => {
   }
   switch (type) {
   case 'FETCH_USER_LISTS':
-    return payload.entities.users[action.userID].lists
+    //return payload.entities.users[action.userID].lists
+    return payload.result
   case 'ADD_LIST':
     return [
       ...state,

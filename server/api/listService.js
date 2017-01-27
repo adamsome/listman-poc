@@ -11,7 +11,7 @@ export const getLists = (userID) => {
       },
     }, {
       id: '1',
-      name: 'List 1',
+      name: 'List 2',
       author: {
         id: 'adamsome',
         description: 'Lorem ipsum',
@@ -19,7 +19,7 @@ export const getLists = (userID) => {
       },
     }
   ]
-  console.log('api.list.addList.res', lists)
+  console.log('api.list.getLists.res', lists)
   return new Promise(res => res(lists))
 }
 

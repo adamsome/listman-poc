@@ -41,10 +41,10 @@ export const users = userIDs.map(id => ({
 // Construct list objects based on the array of list names
 export const lists = listNames.map((name, listIdx) => {
   // Determine list's author by inspecting userListsByIndex
-  const author = Object.keys(userListsByIndex).reduce((userID, userIdx) => {
+  const author = Object.keys(userListsByIndex).reduce((author, userIdx) => {
     return (userListsByIndex[userIdx].includes(listIdx))
-      ? users[userIdx].id
-      : userID
+      ? users[userIdx]
+      : author
   }, undefined)
   return {
     id: uuidV4(),
@@ -92,12 +92,9 @@ class DB {
     if (!this.users[userID]) {
       throw new Error(`User ${userID} was not found.`)
     }
-    const userLists = {
-      ...this.users[userID],
-      lists: this.userLists[userID].map(listID => this.lists[listID])
-    }
-    this.log('api-get-user-list', userLists)
-    return userLists
+    const lists = this.userLists[userID].map(listID => this.lists[listID])
+    this.log('api-get-user-lists', lists)
+    return lists
   }
 
   addList(userID, name) {
@@ -108,9 +105,11 @@ class DB {
       throw new Error(`List name must not be blank.`)
     }
     const id = uuidV4()
-    const list = { id, name, author: userID }
+    let list = { id, name, author: userID }
     this.lists = { ...this.lists, [id]: list }
     this.userLists[userID] = [...this.userLists[userID], id]
+    // Add full author in API response
+    list.author = this.users[userID]
     this.log('api-add-lists', list)
     return list
   }

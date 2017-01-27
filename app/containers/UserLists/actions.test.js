@@ -13,18 +13,19 @@ const users = [{
   avatar: 'http://path/to/avatar',
 }]
 const lists = [
-  { id: '0', name: 'List 1' }
+  { id: '0', name: 'List 1', author: users[0].id },
+  { id: '1', name: 'List 2', author: users[0].id },
 ]
 
-const apiFetchUserListsMockResponse = {
-  ...users[0],
-  lists,
-}
-const apiFetchUserListsMock = (userID) =>
-  Promise.resolve(apiFetchUserListsMockResponse)
-
 // Mock the API call made by the async action
-api.fetchUserLists = jest.fn().mockImplementation(apiFetchUserListsMock)
+const listsResponse = [
+  { id: '0', name: 'List 1', author: users[0] },
+  { id: '1', name: 'List 2', author: users[0] },
+]
+api.fetchUserLists = jest.fn().mockImplementation((userID) =>
+  Promise.resolve(listsResponse)
+)
+
 asyncTest({
   testName: 'simulate fetch user lists',
   initialState,  
@@ -44,15 +45,13 @@ asyncTest({
         entities: {
           lists: {
             [lists[0].id]: lists[0],
+            [lists[1].id]: lists[1],
           },
           users: {
-            [users[0].id]: {
-              ...users[0],
-              lists: [ lists[0].id ],
-            },
+            [users[0].id]: users[0],
           },
         },
-        result: users[0].id,
+        result: [ lists[0].id, lists[1].id ],
       } 
   }],
 })
@@ -76,15 +75,27 @@ asyncTest({
         entities: {
           lists: {
             [lists[0].id]: lists[0],
+            [lists[1].id]: lists[1],
           },
           users: {
-            [users[0].id]: {
-              ...users[0],
-              lists: [ lists[0].id ],
-            },
+            [users[0].id]: users[0],
           },
         },
-        result: users[0].id,
+        result: [ lists[0].id, lists[1].id ],
       } 
   }],
+})
+
+asyncTest({
+  testName: 'simulates should not fetch user lists',
+  initialState: {
+    ...initialState,
+    users: {
+      [users[0].id]: users[0],
+    }
+  },  
+  action: fetchUserListsIfNeeded,
+  params: [users[0].id],
+  mockAPI: api,
+  expectedActions: [],
 })
