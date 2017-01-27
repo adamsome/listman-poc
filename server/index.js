@@ -3,6 +3,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 
 import { makeMiddleware, renderApp, handleOpenBrowser } from './webpackMiddleware'
+import api from './api'
 import { BUILD, PUBLIC } from '../config/paths'
 import Error500 from './templates/Error500'
 
@@ -40,8 +41,7 @@ app.use((err, req, res, next) => (err) ? res.render500(err) : next())
 //app.use('/', express.static(BUILD, { maxAge: oneDay }))
 //app.use('/', express.static(PUBLIC, { maxAge: oneDay }))
 
-// TODO: Implement API router
-//app.use('/api', apiRouter)
+app.use('/api/v1', api)
 
 // TODO: This is for DEV env, implement PROD
 if (process.env.NODE_ENV !== "production") {
