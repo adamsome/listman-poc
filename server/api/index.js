@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import logger from 'morgan'
 
 import * as listService from './listService'
+import * as userService from './userService'
 
 const app = express()
 
@@ -26,6 +27,12 @@ app.use((req, res, next) => {
   req.user = user
   res.locals.user = user
   next()
+})
+
+app.get('/users/:user', (req, res) => {
+  userService.get(req.params.user)
+    .then((result) => res.json(result))
+    .catch((error) => errorHandler(error, req, res))
 })
 
 app.get('/users/:user/lists', (req, res) => {

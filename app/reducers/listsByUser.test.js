@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import toJson from 'enzyme-to-json'
 
-import db from '../api/mockDB'
+import db from '../../server/api/mockDB'
 import reducer from './listsByUser'
 
 const user = {

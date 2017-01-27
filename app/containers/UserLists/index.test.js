@@ -34,9 +34,11 @@ it('renders <NotFound> on error', () => {
 
 it('fetches on mount', () => {
   const mockFetch = jest.fn(() => Promise.resolve())
+  const mockFetch2 = jest.fn(() => Promise.resolve())
   const wrapper = mount(
     <UserLists
       fetchUserListsIfNeeded={mockFetch}
+      fetchUserIfNeeded={mockFetch}
       params={{userID: "test_username"}}
       user={{
         username: "test_username",

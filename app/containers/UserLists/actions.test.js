@@ -90,8 +90,8 @@ asyncTest({
   name: 'simulates should not fetch user lists',
   initialState: {
     ...initialState,
-    users: {
-      [users[0].id]: users[0],
+    listsByUser: {
+      [users[0].id]: { lists: [] },
     }
   },  
   action: fetchUserListsIfNeeded,

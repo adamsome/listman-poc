@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as fromApp from '../../reducers'
 import * as fromUsers from '../../reducers/users'
-import { fetchUserListsIfNeeded, addList } from './actions'
+import { fetchUserIfNeeded, fetchUserListsIfNeeded, addList } from './actions'
 import UserPage from '../../components/UserPage'
 import NotFound from '../../components/NotFound'
 
@@ -26,6 +26,8 @@ export class UserLists extends React.Component {
 
   fetchUserLists(userID) {
     this.props.fetchUserListsIfNeeded(userID)
+      .then(() => this.props.fetchUserIfNeeded(userID))
+      .catch(e => e) // Actions handle the errors
   }
 
   render() {
@@ -59,6 +61,6 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { fetchUserListsIfNeeded, addList },
+  { fetchUserIfNeeded, fetchUserListsIfNeeded, addList },
 )(UserLists)
 

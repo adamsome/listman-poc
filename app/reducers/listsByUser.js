@@ -6,7 +6,6 @@ const lists = (state = undefined, action) => {
   }
   switch (type) {
   case 'FETCH_USER_LISTS':
-    //return payload.entities.users[action.userID].lists
     return payload.result
   case 'ADD_LIST':
     return [
@@ -21,16 +20,7 @@ const lists = (state = undefined, action) => {
 const isLoading = (state = false, action) => {
   switch (action.type) {
   case 'FETCH_USER_LISTS':
-    // Status is not 'error' or 'success' so we are loading
-    return (action.status) ? false : true
-  default:
-    return state
-  }
-}
-
-const isAdding = (state = false, action) => {
-  switch (action.type) {
-  case 'ADD_LIST':
+  case 'FETCH_USER':
     // Status is not 'error' or 'success' so we are loading
     return (action.status) ? false : true
   default:
@@ -41,10 +31,21 @@ const isAdding = (state = false, action) => {
 const error = (state = null, action) => {
   switch (action.type) {
   case 'FETCH_USER_LISTS':
+  case 'FETCH_USER':
     if (action.status === 'error') {
       return action.payload
     }
     return null
+  default:
+    return state
+  }
+}
+
+const isAdding = (state = false, action) => {
+  switch (action.type) {
+  case 'ADD_LIST':
+    // Status is not 'error' or 'success' so we are loading
+    return (action.status) ? false : true
   default:
     return state
   }
@@ -66,8 +67,8 @@ const listsByUserEntry = (state = {}, action) => {
   return {
     lists: lists(state.lists, action),
     isLoading: isLoading(state.isLoading, action),
-    isAdding: isAdding(state.isAdding, action),
     error: error(state.error, action),
+    isAdding: isAdding(state.isAdding, action),
     addError: addError(state.addError, action),
   }
 }

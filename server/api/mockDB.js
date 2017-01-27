@@ -88,6 +88,15 @@ class DB {
     if (this.debug) console.log.apply(this, arguments)
   }
 
+  getUser(userID) {
+    if (!this.users[userID]) {
+      throw new Error(`User ${userID} was not found.`)
+    }
+    const user = this.users[userID]
+    this.log('api-get-user', user)
+    return user
+  }
+
   getUserLists(userID) {
     if (!this.users[userID]) {
       throw new Error(`User ${userID} was not found.`)
