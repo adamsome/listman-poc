@@ -1,5 +1,5 @@
 // Store user -> lists here
-const lists = (state = [], action) => {
+const lists = (state = undefined, action) => {
   const { type, status, payload } = action
   if (status !== 'success') {
     return state

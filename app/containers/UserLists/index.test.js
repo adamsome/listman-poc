@@ -33,7 +33,7 @@ it('renders <NotFound> on error', () => {
 })
 
 it('fetches on mount', () => {
-  const mockFetch = jest.fn()
+  const mockFetch = jest.fn(() => Promise.resolve())
   const wrapper = mount(
     <UserLists
       fetchUserListsIfNeeded={mockFetch}

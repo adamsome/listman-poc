@@ -44,7 +44,7 @@ it('fetch should return loading when no status given', () => {
     reducer({}, makeAction(fetchAction, user))
   ).toEqual({
     [user.id]: {
-      lists: [],
+      lists: undefined,
       isLoading: true,
       error: null,
       isAdding: false,
@@ -58,7 +58,7 @@ it('add should return loading when no status given', () => {
     reducer({}, makeAction(addAction, user))
   ).toEqual({
     [user.id]: {
-      lists: [],
+      lists: undefined,
       isLoading: false,
       error: null,
       isAdding: true,
@@ -72,7 +72,7 @@ it('fetch error should return error & no loading', () => {
     reducer({}, makeAction(fetchAction, user, 'error', 'err'))
   ).toEqual({
     [user.id]: {
-      lists: [],
+      lists: undefined,
       isLoading: false,
       error: 'err',
       isAdding: false,
@@ -86,7 +86,7 @@ it('add error should return error & no adding', () => {
     reducer({}, makeAction(addAction, user, 'error', 'err'))
   ).toEqual({
     [user.id]: {
-      lists: [],
+      lists: undefined,
       isLoading: false,
       error: null,
       isAdding: false,

@@ -4,25 +4,24 @@ import * as fromApp from '../../reducers'
 import * as fromUsers from '../../reducers/users'
 import * as schema from '../../api/schemas'
 
-const fetchAction = (type, userID, status, payload) => ({
-  type,
-  userID,
-  status,
-  payload,
-})
+const dispatchError = ({ dispatch, err, ...rest }) => {
+  const unknown = !err.response || !err.response.data.error
+  const error = (unknown) ? err : err.response.data.error
+  const payload = (unknown) ? `Unknown error on addList (${error.message})`
+                            : `${error.message}`
+  console.error(payload, error)
+  dispatch({ ...rest, status: 'error', payload })
+}
 
 export const fetchUserLists = (userID) => (dispatch, getState, api) => {
   const type = 'FETCH_USER_LISTS'
-  dispatch(fetchAction(type, userID))
+  dispatch({ type, userID })
   return api.fetchUserLists(userID)
-    .then(response => {
-      const payload = normalize(response, schema.listArray)
+    .then(res => {
+      const payload = normalize(res, schema.listArray)
       dispatch({ type, userID, status: 'success', payload })
     })
-    .catch((err) => {
-      console.error(err)
-      dispatch(fetchAction(type, userID, 'error', err.message))
-    })
+    .catch((err) => dispatchError({ dispatch, err, type, userID }))
 }
 
 const shouldFetchUserLists = (state, userID) => {
@@ -36,23 +35,19 @@ const shouldFetchUserLists = (state, userID) => {
   return false
 }
 
-export const fetchUserListsIfNeeded = (userID) => (dispatch, getState) => {
-  if (shouldFetchUserLists(getState(), userID)) {
-    return dispatch(fetchUserLists(userID))
-  }
-  return Promise.resolve()
-}
+export const fetchUserListsIfNeeded = (userID) => (dispatch, getState) => (
+  (shouldFetchUserLists(getState(), userID))
+    ? dispatch(fetchUserLists(userID))
+    : Promise.resolve()
+)
 
 export const addList = (userID, name) => (dispatch, _, api) => {
   const type = 'ADD_LIST'
   dispatch({ type, userID })
   return api.addList(userID, name)
-    .then(response => {
-      const payload = normalize(response, schema.list)
+    .then(res => {
+      const payload = normalize(res, schema.list)
       dispatch({ type, userID, status: 'success', payload })
     })
-    .catch((error) => {
-      console.error(error)
-      dispatch({ type, userID, status: 'error', payload: error.message })
-    })
+    .catch((err) => dispatchError({ dispatch, err, type, userID }))
 }

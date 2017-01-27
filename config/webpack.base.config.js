@@ -98,6 +98,7 @@ module.exports = (options) => ({
     }),
     new webpack.ProvidePlugin({
       // Enable fetch
+      // TODO: Remove if using axios
       fetch: 'exports?self.fetch!whatwg-fetch',
     }),
     // Makes some environment variables available to the JS code, for example:

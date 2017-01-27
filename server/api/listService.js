@@ -1,31 +1,19 @@
+import DB from '../../app/api/mockDB'
+
+DB.debug = false
+
+// Simulate network delay
+const delay = (ms) => new Promise(res => setTimeout(res, ms))
+const ms = 1000
+
 export const getLists = (userID) => {
-  console.log('api.list.getLists.req', userID)
-  const lists = [
-    {
-      id: '0',
-      name: 'List 1',
-      owner: {
-        id: 'adamsome',
-        description: 'Lorem ipsum',
-        avatar_url: 'http://bulma.io/images/placeholders/256x256.png',
-      },
-    }, {
-      id: '1',
-      name: 'List 2',
-      owner: {
-        id: 'adamsome',
-        description: 'Lorem ipsum',
-        avatar_url: 'http://bulma.io/images/placeholders/256x256.png',
-      },
-    }
-  ]
-  console.log('api.list.getLists.res', lists)
-  return new Promise(res => res(lists))
+  return delay(ms).then(() => (
+    DB.getUserLists(userID)
+  ))
 }
 
 export const addList = (userID, list) => {
-  console.log('api.list.addList.req', list)
-  const addedList = { ...list, id: '999', owner: userID }
-  console.log('api.list.addList.res', addedList)
-  return new Promise(res => res(addedList))
+  return delay(ms).then(() => (
+    DB.addList(userID, list.name)
+  ))
 }

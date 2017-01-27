@@ -1,17 +1,15 @@
-import DB from './mockDB'
+import axios from 'axios'
 
-const delayMS = 1000
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
+const serverUrl    = 'http://localhost:3000'
+const apiPath      = `${serverUrl}/api/v1`
 
-// TODO: Use real API
-export const fetchUserLists = (userID) =>
-  delay(delayMS).then(() => {
-    return DB.getUserLists(userID)
-  })
+export const fetchUserLists = (userID) => (
+  axios.get(`${apiPath}/users/${userID}/lists`)
+    .then((res) => res.data)
+)
 
-export const addList = (userID, name) =>
-  delay(delayMS).then(() => {
-    return DB.addList(userID, name)
-  })
+export const addList = (userID, name) => (
+  axios.post(`${apiPath}/users/${userID}/lists`, { name })
+    .then((res) => res.data)
+)
 
-// TODO: PICKUP: Add/adjust new Tiles tests

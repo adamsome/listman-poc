@@ -27,7 +27,7 @@ api.fetchUserLists = jest.fn().mockImplementation((userID) =>
 )
 
 asyncTest({
-  testName: 'simulate fetch user lists',
+  name: 'simulate fetch user lists',
   initialState,  
   action: fetchUserLists,
   params: [users[0].id],
@@ -57,7 +57,7 @@ asyncTest({
 })
 
 asyncTest({
-  testName: 'simulates should fetch user lists',
+  name: 'simulates should fetch user lists',
   initialState,  
   action: fetchUserListsIfNeeded,
   params: [users[0].id],
@@ -87,7 +87,7 @@ asyncTest({
 })
 
 asyncTest({
-  testName: 'simulates should not fetch user lists',
+  name: 'simulates should not fetch user lists',
   initialState: {
     ...initialState,
     users: {

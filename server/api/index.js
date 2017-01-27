@@ -31,13 +31,13 @@ app.use((req, res, next) => {
 app.get('/users/:user/lists', (req, res) => {
   listService.getLists(req.params.user)
     .then((result) => res.json(result))
-    .catch((e) => res.status(500).send(e))
+    .catch((error) => errorHandler(error, req, res))
 })
 
 app.post('/users/:user/lists', (req, res) => {
   listService.addList(req.params.user, req.body)
     .then((result) => res.json(result))
-    .catch((e) => res.status(500).send(e))
+    .catch((error) => errorHandler(error, req, res))
 })
 
 app.use('*', (req, res) => {

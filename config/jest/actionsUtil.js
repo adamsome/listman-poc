@@ -1,8 +1,8 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-export const syncTest = ({ testName, expectedAction, action, params }) => {
-  it(testName, () => {
+export const syncTest = ({ name, expectedAction, action, params }) => {
+  it(name, () => {
     expect(action.call(null, ...params)).toEqual(expectedAction)
   });
 };
