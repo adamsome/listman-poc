@@ -10,7 +10,7 @@ it('renders correctly', () => {
       user={{
         id: "test_username",
         description: "description of user",
-        avatar: "http://path/to/avatar",
+        avatar_url: "http://path/to/avatar",
       }}
     />
   )

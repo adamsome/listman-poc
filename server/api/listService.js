@@ -7,7 +7,7 @@ export const getLists = (userID) => {
       owner: {
         id: 'adamsome',
         description: 'Lorem ipsum',
-        avatar: 'http://bulma.io/images/placeholders/256x256.png',
+        avatar_url: 'http://bulma.io/images/placeholders/256x256.png',
       },
     }, {
       id: '1',
@@ -15,7 +15,7 @@ export const getLists = (userID) => {
       owner: {
         id: 'adamsome',
         description: 'Lorem ipsum',
-        avatar: 'http://bulma.io/images/placeholders/256x256.png',
+        avatar_url: 'http://bulma.io/images/placeholders/256x256.png',
       },
     }
   ]

@@ -20,12 +20,12 @@ const makeAction = (type, status, user) => ({
 const user1 = {
   id: 'username',
   description: 'a description',
-  avatar: 'http://path/to/avatar',
+  avatar_url: 'http://path/to/avatar',
 }
 const user2 = {
   id: 'other-user',
   description: 'other description',
-  avatar: 'http://path/to/other/avatar',
+  avatar_url: 'http://path/to/other/avatar',
 }
 
 it('returns initial state', () => {

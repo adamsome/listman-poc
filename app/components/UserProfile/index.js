@@ -19,7 +19,7 @@ const loadingUser = {
 const renderAvatar = (user, isLoading) => (
   <Avatar
     username={user.id}
-    imgSrc={user.avatar}
+    url={user.avatar_url}
     isLoading={isLoading}
   />
 )

@@ -13,7 +13,7 @@ it('renders correctly', () => {
       user={{
         username: "test_username",
         description: "description of user",
-        avatar: "http://path/to/avatar",
+        avatar_url: "http://path/to/avatar",
       }}
       lists={[
         { title: "list title" }
@@ -41,7 +41,7 @@ it('fetches on mount', () => {
       user={{
         username: "test_username",
         description: "description of user",
-        avatar: "http://path/to/avatar",
+        avatar_url: "http://path/to/avatar",
       }}
       lists={[
         { title: "list title" }

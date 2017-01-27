@@ -10,7 +10,7 @@ const initialState = {
 const users = [{
   id: 'other-user',
   description: 'desc',
-  avatar: 'http://path/to/avatar',
+  avatar_url: 'http://path/to/avatar',
 }]
 const lists = [
   { id: '0', name: 'List 1', owner: users[0].id },

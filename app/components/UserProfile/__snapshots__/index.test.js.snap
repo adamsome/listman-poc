@@ -3,7 +3,7 @@ exports[`test renders correctly 1`] = `
   <Media
     left={
       <Avatar
-        imgSrc="http://path/to/avatar"
+        url="http://path/to/avatar"
         username="test_username" />
     }
     right={

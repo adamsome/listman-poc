@@ -16,7 +16,7 @@ exports[`test renders correctly 1`] = `
   }
   user={
     Object {
-      "avatar": "http://path/to/avatar",
+      "avatar_url": "http://path/to/avatar",
       "description": "description of user",
       "username": "test_username",
     }

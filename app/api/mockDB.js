@@ -35,7 +35,7 @@ export const userListsByIndex = {
 export const users = userIDs.map(id => ({
   id,
   description: loremIpsum,
-  avatar: avatar_url,
+  avatar_url,
 }))
 
 // Construct list objects based on the array of list names
