@@ -4,7 +4,7 @@ export const getLists = (userID) => {
     {
       id: '0',
       name: 'List 1',
-      author: {
+      owner: {
         id: 'adamsome',
         description: 'Lorem ipsum',
         avatar: 'http://bulma.io/images/placeholders/256x256.png',
@@ -12,7 +12,7 @@ export const getLists = (userID) => {
     }, {
       id: '1',
       name: 'List 2',
-      author: {
+      owner: {
         id: 'adamsome',
         description: 'Lorem ipsum',
         avatar: 'http://bulma.io/images/placeholders/256x256.png',
@@ -25,7 +25,7 @@ export const getLists = (userID) => {
 
 export const addList = (userID, list) => {
   console.log('api.list.addList.req', list)
-  const addedList = { ...list, id: '999', author: userID }
+  const addedList = { ...list, id: '999', owner: userID }
   console.log('api.list.addList.res', addedList)
   return new Promise(res => res(addedList))
 }

@@ -40,16 +40,16 @@ export const users = userIDs.map(id => ({
 
 // Construct list objects based on the array of list names
 export const lists = listNames.map((name, listIdx) => {
-  // Determine list's author by inspecting userListsByIndex
-  const author = Object.keys(userListsByIndex).reduce((author, userIdx) => {
+  // Determine list's owner by inspecting userListsByIndex
+  const owner = Object.keys(userListsByIndex).reduce((owner, userIdx) => {
     return (userListsByIndex[userIdx].includes(listIdx))
       ? users[userIdx]
-      : author
+      : owner
   }, undefined)
   return {
     id: uuidV4(),
     name,
-    author,
+    owner,
   }
 })
 
@@ -105,11 +105,11 @@ class DB {
       throw new Error(`List name must not be blank.`)
     }
     const id = uuidV4()
-    let list = { id, name, author: userID }
+    let list = { id, name, owner: userID }
     this.lists = { ...this.lists, [id]: list }
     this.userLists[userID] = [...this.userLists[userID], id]
-    // Add full author in API response
-    list.author = this.users[userID]
+    // Add full owner in API response
+    list.owner = this.users[userID]
     this.log('api-add-lists', list)
     return list
   }

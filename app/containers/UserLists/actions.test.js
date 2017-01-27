@@ -13,14 +13,14 @@ const users = [{
   avatar: 'http://path/to/avatar',
 }]
 const lists = [
-  { id: '0', name: 'List 1', author: users[0].id },
-  { id: '1', name: 'List 2', author: users[0].id },
+  { id: '0', name: 'List 1', owner: users[0].id },
+  { id: '1', name: 'List 2', owner: users[0].id },
 ]
 
 // Mock the API call made by the async action
 const listsResponse = [
-  { id: '0', name: 'List 1', author: users[0] },
-  { id: '1', name: 'List 2', author: users[0] },
+  { id: '0', name: 'List 1', owner: users[0] },
+  { id: '1', name: 'List 2', owner: users[0] },
 ]
 api.fetchUserLists = jest.fn().mockImplementation((userID) =>
   Promise.resolve(listsResponse)
