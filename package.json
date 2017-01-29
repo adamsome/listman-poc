@@ -66,6 +66,7 @@
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "normalizr": "^3.1.0",
+    "pg-promise": "^5.5.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-onclickoutside": "^5.8.3",
