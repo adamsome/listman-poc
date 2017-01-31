@@ -8,13 +8,14 @@ const initialState = {
   listsByUser: {},
 }
 const users = [{
-  id: 'other-user',
+  id: 0,
+  username: 'other-user',
   description: 'desc',
   avatar_url: 'http://path/to/avatar',
 }]
 const lists = [
-  { id: '0', name: 'List 1', owner: users[0].id },
-  { id: '1', name: 'List 2', owner: users[0].id },
+  { id: '0', name: 'List 1', owner: users[0].username },
+  { id: '1', name: 'List 2', owner: users[0].username },
 ]
 
 // Mock the API call made by the async action
@@ -22,7 +23,7 @@ const listsResponse = [
   { id: '0', name: 'List 1', owner: users[0] },
   { id: '1', name: 'List 2', owner: users[0] },
 ]
-api.fetchUserLists = jest.fn().mockImplementation((userID) =>
+api.fetchUserLists = jest.fn().mockImplementation((username) =>
   Promise.resolve(listsResponse)
 )
 
@@ -30,16 +31,14 @@ asyncTest({
   name: 'simulate fetch user lists',
   initialState,  
   action: fetchUserLists,
-  params: [users[0].id],
+  params: [users[0].username],
   mockAPI: api,
   expectedActions: [{
       type: "FETCH_USER_LISTS",
-      userID: users[0].id,
-      status: undefined,
-      payload: undefined,
+      username: users[0].username,
     }, {
       type: "FETCH_USER_LISTS",
-      userID: users[0].id,
+      username: users[0].username,
       status: 'success',
       payload: {
         entities: {
@@ -48,7 +47,7 @@ asyncTest({
             [lists[1].id]: lists[1],
           },
           users: {
-            [users[0].id]: users[0],
+            [users[0].username]: users[0],
           },
         },
         result: [ lists[0].id, lists[1].id ],
@@ -60,16 +59,14 @@ asyncTest({
   name: 'simulates should fetch user lists',
   initialState,  
   action: fetchUserListsIfNeeded,
-  params: [users[0].id],
+  params: [users[0].username],
   mockAPI: api,
   expectedActions: [{
       type: "FETCH_USER_LISTS",
-      userID: users[0].id,
-      status: undefined,
-      payload: undefined,
+      username: users[0].username,
     }, {
       type: "FETCH_USER_LISTS",
-      userID: users[0].id,
+      username: users[0].username,
       status: 'success',
       payload: {
         entities: {
@@ -78,7 +75,7 @@ asyncTest({
             [lists[1].id]: lists[1],
           },
           users: {
-            [users[0].id]: users[0],
+            [users[0].username]: users[0],
           },
         },
         result: [ lists[0].id, lists[1].id ],
@@ -91,11 +88,11 @@ asyncTest({
   initialState: {
     ...initialState,
     listsByUser: {
-      [users[0].id]: { lists: [] },
+      [users[0].username]: { lists: [] },
     }
   },  
   action: fetchUserListsIfNeeded,
-  params: [users[0].id],
+  params: [users[0].username],
   mockAPI: api,
   expectedActions: [],
 })

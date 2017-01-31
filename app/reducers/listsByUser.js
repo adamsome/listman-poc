@@ -74,11 +74,11 @@ const listsByUserEntry = (state = {}, action) => {
 }
 
 const listsByUser = (state = {}, action) => {
-  const { userID } = action
-  if (userID) {
+  const { username } = action
+  if (username) {
     return {
       ...state,
-      [userID]: listsByUserEntry(state[userID], action),
+      [username]: listsByUserEntry(state[username], action),
     }
   }
   return state
@@ -86,32 +86,32 @@ const listsByUser = (state = {}, action) => {
 
 export default listsByUser
 
-export const getEntry = (state, userID) => {
-  return state[userID]
+export const getEntry = (state, username) => {
+  return state[username]
 }
 
-export const getLists = (state, userID) => {
-  const entry = getEntry(state, userID)
+export const getLists = (state, username) => {
+  const entry = getEntry(state, username)
   return (entry) ? entry.lists : undefined
 }
 
-export const getIsLoading = (state, userID) => {
-  const entry = getEntry(state, userID)
+export const getIsLoading = (state, username) => {
+  const entry = getEntry(state, username)
   return (entry) ? entry.isLoading : false
 }
 
-export const getIsAdding = (state, userID) => {
-  const entry = getEntry(state, userID)
+export const getIsAdding = (state, username) => {
+  const entry = getEntry(state, username)
   return (entry) ? entry.isAdding : false
 }
 
-export const getError = (state, userID) => {
-  const entry = getEntry(state, userID)
+export const getError = (state, username) => {
+  const entry = getEntry(state, username)
   return (entry) ? entry.error : null
 }
 
-export const getAddError = (state, userID) => {
-  const entry = getEntry(state, userID)
+export const getAddError = (state, username) => {
+  const entry = getEntry(state, username)
   return (entry) ? entry.addError : null
 }
 

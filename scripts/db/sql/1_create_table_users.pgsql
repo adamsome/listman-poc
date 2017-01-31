@@ -25,7 +25,7 @@ create table lists (
   name text not null,
   owner bigint not null references users,
   description text,
-  items_rank bigint[] not null,
+  items_rank bigint[] not null default array[]::bigint[],
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

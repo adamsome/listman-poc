@@ -39,7 +39,7 @@ it('fetches on mount', () => {
     <UserLists
       fetchUserListsIfNeeded={mockFetch}
       fetchUserIfNeeded={mockFetch}
-      params={{userID: "test_username"}}
+      params={{username: "test_username"}}
       user={{
         username: "test_username",
         description: "description of user",

@@ -22,41 +22,32 @@ values (
   'http://bulma.io/images/placeholders/256x256.png'
 );
 
-insert into lists (name, owner, items_rank)
+insert into lists (name, owner)
 values (
   'Favorite Things of 2016',
-  (select id from users where username = 'adamsome'),
-  array[1, 2]::bigint[]
+  (select id from users where username = 'adamsome')
 ), (
   'Favorite Things of 2015',
-  (select id from users where username = 'adamsome'),
-  array[]::bigint[]
+  (select id from users where username = 'adamsome')
 ), (
   'Sample List No. 1 w/ many items',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   'List Two of Samples',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   'Third List of Samples with a very, very, long name',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   'Sample List IV',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   'Fifth Samples Listing',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   '666',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 ), (
   '7th list of samples',
-  (select id from users where username = 'other-user'),
-  array[]::bigint[]
+  (select id from users where username = 'other-user')
 )

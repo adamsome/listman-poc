@@ -6,7 +6,7 @@ import './UserProfile.scss'
 
 // If loading, use a blank user object as the loading indicator
 const loadingUser = {
-  id:
+  username:
     <span className="user-profile__text--loading">
       {"_".repeat(15)}
     </span>,
@@ -18,7 +18,7 @@ const loadingUser = {
 
 const renderAvatar = (user, isLoading) => (
   <Avatar
-    username={user.id}
+    username={user.username}
     url={user.avatar_url}
     isLoading={isLoading}
   />
@@ -36,9 +36,9 @@ const renderMenu = () => (
 const renderProfile = (user, isLoading) => (
   <div>
     <h1 className={
-        "title is-1" + (isLoading ? " user-profile__id--loading" : "")
+        "title is-1" + (isLoading ? " user-profile__username--loading" : "")
       }>
-      {user.id}
+      {user.username}
     </h1>
     <p className="subtitle is-5">
       {user.description}

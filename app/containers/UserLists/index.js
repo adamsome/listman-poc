@@ -9,29 +9,29 @@ import NotFound from '../../components/NotFound'
 
 export class UserLists extends React.Component {
   componentDidMount() {
-    const { userID } = this.props
-    this.fetchUserLists(userID)
+    const { username } = this.props
+    this.fetchUserLists(username)
   }
 
   componentDidUpdate(prevProps) {
     // Fetch if user changed (or if previous user was undefined)
-    const { userID } = this.props
-    const prevUserID = prevProps.userID
-    if (userID !== prevUserID) {
+    const { username } = this.props
+    const prevUsername = prevProps.username
+    if (username !== prevUsername) {
       console.log(`<UserLists> update fetch` +
-                  `(user ${userID} != prevUser ${prevUserID})`)
-      this.fetchUserLists(userID)
+                  `(user ${username} != prevUser ${prevUsername})`)
+      this.fetchUserLists(username)
     }
   }
 
-  fetchUserLists(userID) {
-    this.props.fetchUserListsIfNeeded(userID)
-      .then(() => this.props.fetchUserIfNeeded(userID))
+  fetchUserLists(username) {
+    this.props.fetchUserListsIfNeeded(username)
+      .then(() => this.props.fetchUserIfNeeded(username))
       .catch(e => e) // Actions handle the errors
   }
 
   render() {
-    const { userID, user, lists, isLoading,
+    const { username, user, lists, isLoading,
             error, isAdding, addError, addList } = this.props
     return (error)
       ? <NotFound error={error} />
@@ -41,21 +41,21 @@ export class UserLists extends React.Component {
           isLoading={isLoading}
           isAdding={isAdding}
           addError={addError}
-          addList={(name) => addList(userID, name)}
+          addList={(name) => addList(username, name)}
         />
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const userID = ownProps.params.userID
+  const username = ownProps.params.username
   return {
-    userID,
-    user: fromUsers.getUser(fromApp.getUsers(state), userID),
-    lists: fromApp.getListsByUser(state, userID),
-    isLoading: fromApp.getListsByUserIsLoading(state, userID),
-    error: fromApp.getListsByUserError(state, userID),
-    isAdding: fromApp.getListsByUserIsAdding(state, userID),
-    addError: fromApp.getListsByUserAddError(state, userID),
+    username,
+    user: fromUsers.getUser(fromApp.getUsers(state), username),
+    lists: fromApp.getListsByUser(state, username),
+    isLoading: fromApp.getListsByUserIsLoading(state, username),
+    error: fromApp.getListsByUserError(state, username),
+    isAdding: fromApp.getListsByUserIsAdding(state, username),
+    addError: fromApp.getListsByUserAddError(state, username),
   }
 }
 

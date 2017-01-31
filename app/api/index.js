@@ -4,18 +4,18 @@ const request = axios.create({
   baseURL: 'http://localhost:3000/api/v1'
 })
 
-export const fetchUser = (userID) => (
-  request.get(`/users/${userID}`)
+export const fetchUser = (username) => (
+  request.get(`/users/${username}`)
     .then((res) => res.data)
 )
 
-export const fetchUserLists = (userID) => (
-  request.get(`/users/${userID}/lists`)
+export const fetchUserLists = (username) => (
+  request.get(`/users/${username}/lists`)
     .then((res) => res.data)
 )
 
-export const addList = (userID, name) => (
-  request.post(`/users/${userID}/lists`, { name })
+export const addList = (username, name) => (
+  request.post(`/users/${username}/lists`, { name })
     .then((res) => res.data)
 )
 

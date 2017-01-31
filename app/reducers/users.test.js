@@ -8,7 +8,7 @@ const action = 'FETCH_USER_LISTS'
 const makeAction = (type, status, user) => ({
   type,
   status,
-  userID: user.id,
+  username: user.id,
   payload: {
     entities: {
       users: {

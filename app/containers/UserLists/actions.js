@@ -15,73 +15,73 @@ const dispatchError = ({ dispatch, err, ...rest }) => {
 
 // Fetch User
 
-export const fetchUser = (userID) => (dispatch, _, api) => {
+export const fetchUser = (username) => (dispatch, _, api) => {
   const type = 'FETCH_USER'
-  dispatch({ type, userID })
-  return api.fetchUser(userID)
+  dispatch({ type, username })
+  return api.fetchUser(username)
     .then(res => {
       const payload = normalize(res, schema.user)
-      dispatch({ type, userID, status: 'success', payload })
+      dispatch({ type, username, status: 'success', payload })
     })
-    .catch((err) => dispatchError({ dispatch, err, type, userID }))
+    .catch((err) => dispatchError({ dispatch, err, type, username }))
 }
 
-const shouldFetchUser = (state, userID) => {
-  const user = fromUsers.getUser(fromApp.getUsers(state), userID)
-  if (!user || fromApp.getListsByUserError(state, userID)) {
+const shouldFetchUser = (state, username) => {
+  const user = fromUsers.getUser(fromApp.getUsers(state), username)
+  if (!user || fromApp.getListsByUserError(state, username)) {
     return true
-  } else if (fromApp.getListsByUserIsLoading(state, userID)) {
+  } else if (fromApp.getListsByUserIsLoading(state, username)) {
     return false
   }
   // TODO: Support user invalidation (i.e. `return user.didInvalidate`)
   return false
 }
 
-export const fetchUserIfNeeded = (userID) => (dispatch, getState) => (
-  (shouldFetchUser(getState(), userID))
-    ? dispatch(fetchUser(userID))
+export const fetchUserIfNeeded = (username) => (dispatch, getState) => (
+  (shouldFetchUser(getState(), username))
+    ? dispatch(fetchUser(username))
     : Promise.resolve()
 )
 
 // Fetch User Lists
 
-export const fetchUserLists = (userID) => (dispatch, _, api) => {
+export const fetchUserLists = (username) => (dispatch, _, api) => {
   const type = 'FETCH_USER_LISTS'
-  dispatch({ type, userID })
-  return api.fetchUserLists(userID)
+  dispatch({ type, username })
+  return api.fetchUserLists(username)
     .then(res => {
       const payload = normalize(res, schema.listArray)
-      dispatch({ type, userID, status: 'success', payload })
+      dispatch({ type, username, status: 'success', payload })
     })
-    .catch((err) => dispatchError({ dispatch, err, type, userID }))
+    .catch((err) => dispatchError({ dispatch, err, type, username }))
 }
 
-const shouldFetchUserLists = (state, userID) => {
-  const userLists = fromApp.getListsByUser(state, userID)
-  if (!userLists || fromApp.getListsByUserError(state, userID)) {
+const shouldFetchUserLists = (state, username) => {
+  const userLists = fromApp.getListsByUser(state, username)
+  if (!userLists || fromApp.getListsByUserError(state, username)) {
     return true
-  } else if (fromApp.getListsByUserIsLoading(state, userID)) {
+  } else if (fromApp.getListsByUserIsLoading(state, username)) {
     return false
   }
   // TODO: Support userList invalidation (i.e. `return userList.didInvalidate`)
   return false
 }
 
-export const fetchUserListsIfNeeded = (userID) => (dispatch, getState) => (
-  (shouldFetchUserLists(getState(), userID))
-    ? dispatch(fetchUserLists(userID))
+export const fetchUserListsIfNeeded = (username) => (dispatch, getState) => (
+  (shouldFetchUserLists(getState(), username))
+    ? dispatch(fetchUserLists(username))
     : Promise.resolve()
 )
 
 // Add List
 
-export const addList = (userID, name) => (dispatch, _, api) => {
+export const addList = (username, name) => (dispatch, _, api) => {
   const type = 'ADD_LIST'
-  dispatch({ type, userID })
-  return api.addList(userID, name)
+  dispatch({ type, username })
+  return api.addList(username, name)
     .then(res => {
       const payload = normalize(res, schema.list)
-      dispatch({ type, userID, status: 'success', payload })
+      dispatch({ type, username, status: 'success', payload })
     })
-    .catch((err) => dispatchError({ dispatch, err, type, userID }))
+    .catch((err) => dispatchError({ dispatch, err, type, username }))
 }
