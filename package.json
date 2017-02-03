@@ -14,7 +14,7 @@
     "clean": "babel-node internal/scripts/clean",
     "deploy": "babel-node internal/scripts/deploy",
     "development": "babel-node internal/development",
-    "lint": "eslint src config tools",
+    "lint": "eslint client server shared config tools",
     "preinstall": "node internal/scripts/preinstall",
     "start": "node build/server",
     "test:coverage": "jest --coverage",

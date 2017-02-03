@@ -6,7 +6,6 @@ import Helmet from 'react-helmet';
 
 import * as PostActions from '../../../../actions/posts';
 import * as FromState from '../../../../reducers';
-import type { Post as PostType } from '../../../../types/model';
 
 function Post({ post } : Props) {
   if (!post) {
