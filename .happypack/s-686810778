@@ -1,0 +1,14 @@
+var _jsxFileName = '/Users/Adam/Dev/listman/shared/components/DemoApp/Header/Logo/Logo.js';
+import React from 'react';
+import logo from './logo.png';
+
+function Logo() {
+  return React.createElement('img', { src: logo, alt: 'Logo', style: { width: '100px' }, __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6
+    }
+  });
+}
+
+export default Logo;

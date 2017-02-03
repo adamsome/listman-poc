@@ -1,0 +1,68 @@
+var _jsxFileName = '/Users/Adam/Dev/listman/shared/components/DemoApp/Header/Header.js';
+import React from 'react';
+import Logo from './Logo';
+import Menu from './Menu';
+
+function Header() {
+  return React.createElement(
+    'div',
+    { style: { textAlign: 'center', marginBottom: '1rem' }, __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 7
+      }
+    },
+    React.createElement(Logo, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 8
+      }
+    }),
+    React.createElement(
+      'h1',
+      {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 9
+        }
+      },
+      'React, Universally'
+    ),
+    React.createElement(
+      'strong',
+      {
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 10
+        }
+      },
+      'A starter kit giving you the minimum requirements for a modern universal react application.'
+    ),
+    React.createElement(Menu, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 13
+      }
+    })
+  );
+}
+
+var _default = Header;
+export default _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(Header, 'Header', '/Users/Adam/Dev/listman/shared/components/DemoApp/Header/Header.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/Adam/Dev/listman/shared/components/DemoApp/Header/Header.js');
+}();
+
+;
