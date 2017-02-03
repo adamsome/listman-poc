@@ -1,8 +1,9 @@
 import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
+
 import ListenerManager from './listenerManager';
-import { log } from '../utils';
+import { compileLogger, doneLogger } from './webpackLogger'
 
 class HotClientServer {
   constructor(compiler) {
@@ -38,32 +39,8 @@ class HotClientServer {
 
     this.listenerManager = new ListenerManager(listener, 'client');
 
-    compiler.plugin('compile', () => {
-      log({
-        title: 'client',
-        level: 'info',
-        message: 'Building new bundle...',
-      });
-    });
-
-    compiler.plugin('done', (stats) => {
-      if (stats.hasErrors()) {
-        log({
-          title: 'client',
-          level: 'error',
-          message: 'Build failed, please check the console for more information.',
-          notify: true,
-        });
-        console.error(stats.toString());
-      } else {
-        log({
-          title: 'client',
-          level: 'info',
-          message: 'Running with latest changes.',
-          notify: true,
-        });
-      }
-    });
+    compiler.plugin('compile', compileLogger)
+    compiler.plugin('done', doneLogger)
   }
 
   dispose() {

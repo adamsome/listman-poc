@@ -350,7 +350,7 @@ export default function webpackConfigFactory(buildOptions) {
                 // Stage 3 javascript syntax.
                 // "Candidate: complete spec and initial browser implementations."
                 // Add anything lower than stage 3 at your own risk. :)
-                'stage-3',
+                'stage-0',
                 // For our client bundles we transpile all the latest ratified
                 // ES201X code into ES5, safe for browsers.  We exclude module
                 // transilation as webpack takes care of this for us, doing
@@ -557,10 +557,22 @@ export default function webpackConfigFactory(buildOptions) {
             ),
         }),
       ),
-      // ),
     ]),
     module: {
       rules: removeNil([
+        // ESLINT
+        {
+          test: /\.jsx?$/,
+          include: [
+            path.resolve(appRootDir.get(), 'client'),
+            path.resolve(appRootDir.get(), 'server'),
+            path.resolve(appRootDir.get(), 'shared'),
+            path.resolve(appRootDir.get(), 'config'),
+            path.resolve(appRootDir.get(), 'internal'),
+          ],
+          enforce: 'pre',
+          use: [{loader: 'eslint-loader'}],
+        },
         // JAVASCRIPT
         {
           test: /\.jsx?$/,
