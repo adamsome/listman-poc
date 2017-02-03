@@ -47,6 +47,7 @@ function scriptTag(jsFilePath) {
 function ServerHTML(props) {
   const {
     reactAppString,
+    initialState,
     nonce,
     helmet,
     asyncComponents,
@@ -77,6 +78,14 @@ function ServerHTML(props) {
     // that we can safely expose some configuration values to the
     // client bundle that gets executed in the browser.
     <ClientConfigScript nonce={nonce} />,
+    // Bind the initial application state based on the server render
+    // so the client can register the correct initial state for the view.
+    onlyIf(
+      initialState,
+      () => inlineScript(
+        `window.__APP_STATE__=${serialize(initialState)};`,
+      ),
+    ),
     // Bind our async components state so the client knows which ones
     // to initialise so that the checksum matches the server response.
     onlyIf(

@@ -73,6 +73,7 @@ function reactApplicationMiddleware(request, response) {
           nonce={nonce}
           helmet={Helmet.rewind()}
           asyncComponents={asyncComponents}
+          initialState={getState()}
           jobsState={jobsState}
         />,
       );
