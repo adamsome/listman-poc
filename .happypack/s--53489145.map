@@ -1,1 +1,0 @@
-{"version":3,"sources":["shared/components/DemoApp/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,WAAxB","file":"index.js","sourceRoot":"/Users/Adam/Dev/listman","sourcesContent":["export { default } from './DemoApp';\n"]}

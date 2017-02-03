@@ -50,6 +50,7 @@ function ServerHTML(props) {
     nonce,
     helmet,
     asyncComponents,
+    jobsState
   } = props;
 
   // Creates an inline script definition that is protected by the nonce.
@@ -82,6 +83,12 @@ function ServerHTML(props) {
       asyncComponents,
       () => inlineScript(
         `window.${asyncComponents.STATE_IDENTIFIER}=${serialize(asyncComponents.state)};`,
+      ),
+    ),
+    onlyIf(
+      jobsState,
+      () => inlineScript(
+        `window.${jobsState.STATE_IDENTIFIER}=${serialize(jobsState.state)};`,
       ),
     ),
     // Enable the polyfill io script?

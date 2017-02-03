@@ -4,28 +4,43 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router';
 import { withAsyncComponents } from 'react-async-component';
+import { Provider as ReduxProvider } from 'react-redux';
+import { rehydrateJobs } from 'react-jobs/ssr';
 
+import configureStore from '../shared/redux/configureStore';
 import ReactHotLoader from './components/ReactHotLoader';
 import DemoApp from '../shared/components/DemoApp';
 
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
 
+// Create our Redux store.
+const store = configureStore(
+  // Server side rendering would have mounted our state on this global.
+  window.__APP_STATE__, // eslint-disable-line no-underscore-dangle
+);
+
 function renderApp(TheApp) {
   const app = (
     <ReactHotLoader>
-      <BrowserRouter>
-        <TheApp />
-      </BrowserRouter>
+      <ReduxProvider store={store}>
+        <BrowserRouter>
+          <TheApp />
+        </BrowserRouter>
+      </ReduxProvider>
     </ReactHotLoader>
   );
 
   // We use the react-async-component in order to support super easy code splitting
   // within our application.  It's important to use this helper
   // @see https://github.com/ctrlplusb/react-async-component
-  withAsyncComponents(app).then(({ appWithAsyncComponents }) =>
-    render(appWithAsyncComponents, container),
-  );
+  withAsyncComponents(app)
+    .then(({ appWithAsyncComponents }) =>
+      rehydrateJobs(appWithAsyncComponents)
+    )
+    .then(({ appWithJobs }) =>
+      render(appWithJobs, container)
+    );
 }
 
 // Execute the first render of our app.

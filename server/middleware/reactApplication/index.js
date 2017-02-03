@@ -2,9 +2,12 @@
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { ServerRouter, createServerRenderContext } from 'react-router';
+import { Provider } from 'react-redux';
 import { withAsyncComponents } from 'react-async-component';
 import Helmet from 'react-helmet';
+import { runJobs } from 'react-jobs/ssr';
 
+import configureStore from '../../../shared/redux/configureStore';
 import getConfig from '../../../config/get';
 import DemoApp from '../../../shared/components/DemoApp';
 
@@ -35,6 +38,10 @@ function reactApplicationMiddleware(request, response) {
     return;
   }
 
+  // Create the redux store.
+  const store = configureStore();
+  const { getState } = store;
+
   // First create a context for <ServerRouter>, which will allow us to
   // query for the results of the render.
   const reactRouterContext = createServerRenderContext();
@@ -42,47 +49,56 @@ function reactApplicationMiddleware(request, response) {
   // Create our React application.
   const app = (
     <ServerRouter location={request.url} context={reactRouterContext}>
-      <DemoApp />
+      <Provider store={store}>
+        <DemoApp />
+      </Provider>
     </ServerRouter>
   );
 
   // Wrap our app with react-async-component helper so that our async components
   // will be resolved and rendered with the response.
   withAsyncComponents(app).then(({ appWithAsyncComponents, state, STATE_IDENTIFIER }) => {
-    // Render the app to a string.
-    const reactAppString = renderToString(appWithAsyncComponents);
+    const asyncComponents = { state, STATE_IDENTIFIER }
 
-    // Generate the html response.
-    const html = renderToStaticMarkup(
-      <ServerHTML
-        reactAppString={reactAppString}
-        nonce={nonce}
-        helmet={Helmet.rewind()}
-        asyncComponents={{ state, STATE_IDENTIFIER }}
-      />,
-    );
+    runJobs(appWithAsyncComponents).then(({ appWithJobs, state, STATE_IDENTIFIER }) => {
+      const jobsState = { state, STATE_IDENTIFIER }
 
-    // Get the render result from the server render context.
-    const renderResult = reactRouterContext.getResult();
+      // Render the app to a string.
+      const reactAppString = renderToString(appWithJobs);
 
-    // Check if the render result contains a redirect, if so we need to set
-    // the specific status and redirect header and end the response.
-    if (renderResult.redirect) {
-      response.status(301).setHeader('Location', renderResult.redirect.pathname);
-      response.end();
-      return;
-    }
+      // Generate the html response.
+      const html = renderToStaticMarkup(
+        <ServerHTML
+          reactAppString={reactAppString}
+          nonce={nonce}
+          helmet={Helmet.rewind()}
+          asyncComponents={asyncComponents}
+          jobsState={jobsState}
+        />,
+      );
 
-    response
-      .status(
-        renderResult.missed
-          // If the renderResult contains a "missed" match then we set a 404 code.
-          // Our App component will handle the rendering of an Error404 view.
-          ? 404
-          // Otherwise everything is all good and we send a 200 OK status.
-          : 200,
-      )
-      .send(`<!DOCTYPE html>${html}`);
+      // Get the render result from the server render context.
+      const renderResult = reactRouterContext.getResult();
+
+      // Check if the render result contains a redirect, if so we need to set
+      // the specific status and redirect header and end the response.
+      if (renderResult.redirect) {
+        response.status(301).setHeader('Location', renderResult.redirect.pathname);
+        response.end();
+        return;
+      }
+
+      response
+        .status(
+          renderResult.missed
+            // If the renderResult contains a "missed" match then we set a 404 code.
+            // Our App component will handle the rendering of an Error404 view.
+            ? 404
+            // Otherwise everything is all good and we send a 200 OK status.
+            : 200,
+        )
+        .send(`<!DOCTYPE html>${html}`);
+    });
   });
 }
 

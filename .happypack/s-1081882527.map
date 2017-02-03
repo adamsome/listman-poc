@@ -1,1 +1,0 @@
-{"version":3,"sources":["shared/components/DemoApp/Error404/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT,QAAwB,YAAxB","file":"index.js","sourceRoot":"/Users/Adam/Dev/listman","sourcesContent":["export { default } from './Error404';\n"]}
