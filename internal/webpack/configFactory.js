@@ -407,6 +407,14 @@ export default function webpackConfigFactory(buildOptions) {
               // Include sourcemaps for dev experience++.
               query: { sourceMap: true },
             },
+            { path: 'postcss-loader' },
+            {
+              path: 'sass-loader',
+              options: {
+                outputStyle: 'expanded',
+                sourceMap: true,
+              },
+            },
           ],
         }),
       ),
@@ -575,9 +583,7 @@ export default function webpackConfigFactory(buildOptions) {
         // server.
         ifElse(isClient || isServer)(
           mergeDeep(
-            {
-              test: /\.css$/,
-            },
+            { test: /(\.scss|\.css)$/ },
             // For development clients we will defer all our css processing to the
             // happypack plugin named "happypack-devclient-css".
             // See the respective plugin within the plugins section for full
@@ -594,13 +600,13 @@ export default function webpackConfigFactory(buildOptions) {
             ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({
                 fallbackLoader: 'style-loader',
-                loader: ['css-loader'],
+                loader: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents',
               }),
             })),
             // When targetting the server we use the "/locals" version of the
             // css loader, as we don't need any css files for the server.
             ifNode({
-              loaders: ['css-loader/locals'],
+              loaders: ['css-loader/locals', 'postcss-loader', 'sass-loader'],
             }),
           ),
         ),

@@ -9,7 +9,7 @@ import { runJobs } from 'react-jobs/ssr';
 
 import configureStore from '../../../shared/redux/configureStore';
 import getConfig from '../../../config/get';
-import DemoApp from '../../../shared/components/DemoApp';
+import App from '../../../shared/components/App';
 
 import ServerHTML from './ServerHTML';
 
@@ -50,7 +50,7 @@ function reactApplicationMiddleware(request, response) {
   const app = (
     <ServerRouter location={request.url} context={reactRouterContext}>
       <Provider store={store}>
-        <DemoApp />
+        <App />
       </Provider>
     </ServerRouter>
   );

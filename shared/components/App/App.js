@@ -1,11 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link, Match, Miss } from 'react-router'
 
-import Footer from './components/Layout/Footer'
-import BodyColumn from './components/Layout/BodyColumn'
-import Columns from './components/Layout/Columns'
-import Column from './components/Layout/Columns/Column'
-//import './App.scss'
+import AsyncHome from '../DemoApp/AsyncHome';
+import AsyncPosts from '../DemoApp/AsyncPosts';
+import Error404 from '../DemoApp/Error404';
+
+import Footer from '../Layout/Footer'
+import BodyColumn from '../Layout/BodyColumn'
+import Columns from '../Layout/Columns'
+import Column from '../Layout/Columns/Column'
+
+import './App.scss';
 
 export default class App extends React.Component {
   render() {
@@ -13,13 +18,22 @@ export default class App extends React.Component {
     return (
       <div>
         <section className="section">
-          {children}
+          <Match exactly pattern="/" component={AsyncHome} />
+          <Match pattern="/posts" component={AsyncPosts} />
+          <Miss component={Error404} />
         </section>
         <Footer>
           <BodyColumn>
             {/* Temp dev tools */}
             <h4 className="title is-4">Dev tools</h4>
             <Columns multiline>
+              <Column>
+                <strong>Temp</strong>
+                <br />
+                <Link to='/'>/[home]</Link>
+                <br />
+                <Link to='/posts'>/posts</Link>
+              </Column>
               <Column>
                 <strong>User links</strong>
                 <br />
@@ -40,3 +54,4 @@ export default class App extends React.Component {
     )
   }
 }
+

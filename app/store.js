@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import promiseMiddleware from 'redux-promise'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
@@ -7,7 +6,6 @@ import reducer from './reducers'
 import * as api from './api'
 
 const middleware = [
-  promiseMiddleware,
   thunk.withExtraArgument(api)
 ]
 
