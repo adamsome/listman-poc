@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import Footer from '../Layout/Footer'
-import BodyColumn from '../Layout/BodyColumn'
-import Columns from '../Layout/Columns'
-import Column from '../Layout/Columns/Column'
+import Footer from '../../Layout/Footer'
+import BodyColumn from '../../Layout/BodyColumn'
+import Columns from '../../Layout/Columns'
+import Column from '../../Layout/Columns/Column'
 
 const DevFooter = () => (
   <Footer>
