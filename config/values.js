@@ -44,7 +44,7 @@ const values = {
 
   // This is an example environment variable which is consumed within the
   // './client.js' config.  See there for more details.
-  welcomeMessage: envVars.string('WELCOME_MSG', 'Hello world!'),
+  welcomeMessage: envVars.string('WELCOME_MSG', 'Listman!'),
 
   // Disable server side rendering?
   disableSSR: false,
@@ -74,9 +74,9 @@ const values = {
   // We make use of react-helmet to consume the values below.
   // @see https://github.com/nfl/react-helmet
   htmlPage: {
-    titleTemplate: 'React, Universally - %s',
-    defaultTitle: 'React, Universally',
-    description: 'A starter kit giving you the minimum requirements for a production ready universal react application.',
+    titleTemplate: 'Listman - %s',
+    defaultTitle: 'Listman',
+    description: 'Listman',
   },
 
   // Extended configuration for the Content Security Policy (CSP)
@@ -217,11 +217,17 @@ const values = {
         // webpack loaders in order to be processed (e.g. CSS/SASS etc).
         // For these cases you don't want to include them in the Vendor DLL.
         include: [
-          'react-async-component',
           'react',
+          'react-async-component',
           'react-dom',
           'react-helmet',
+          'react-jobs',
+          'react-onclickoutside',
+          'react-redux',
           'react-router',
+          'redux',
+          'redux-logger',
+          'redux-thunk',
         ],
 
         // The name of the vendor DLL.
@@ -257,17 +263,14 @@ const values = {
     // server will manage starting them up for you.  The only requirement is that
     // within the entry for each bundle you create and return the "express"
     // listener.
-    /*
-    apiServer: {
-      srcEntryFile: './api/index.js',
+    api: {
+      srcEntryFile: './server/api/index.js',
       srcPaths: [
-        './api',
-        './shared',
+        './server/api',
         './config',
       ],
       outputPath: './build/api',
     }
-    */
   },
 
   // These plugin definitions provide you with advanced hooks into customising
