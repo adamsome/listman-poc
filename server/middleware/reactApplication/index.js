@@ -7,7 +7,7 @@ import { withAsyncComponents } from 'react-async-component';
 import Helmet from 'react-helmet';
 import { runJobs } from 'react-jobs/ssr';
 
-import configureStore from '../../../shared/redux/configureStore';
+import makeStore from '../../../shared/redux/store';
 import getConfig from '../../../config/get';
 import App from '../../../shared/components/App';
 
@@ -39,7 +39,7 @@ function reactApplicationMiddleware(request, response) {
   }
 
   // Create the redux store.
-  const store = configureStore();
+  const store = makeStore();
   const { getState } = store;
 
   // First create a context for <ServerRouter>, which will allow us to

@@ -7,7 +7,7 @@ import { withAsyncComponents } from 'react-async-component';
 import { Provider as ReduxProvider } from 'react-redux';
 import { rehydrateJobs } from 'react-jobs/ssr';
 
-import configureStore from '../shared/redux/configureStore';
+import makeStore from '../shared/redux/store';
 import ReactHotLoader from './components/ReactHotLoader';
 import App from '../shared/components/App';
 
@@ -15,7 +15,7 @@ import App from '../shared/components/App';
 const container = document.querySelector('#app');
 
 // Create our Redux store.
-const store = configureStore(
+const store = makeStore(
   // Server side rendering would have mounted our state on this global.
   window.__APP_STATE__, // eslint-disable-line no-underscore-dangle
 );

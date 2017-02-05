@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import reducer from '../reducers';
 
-function configureStore(initialState) {
+function makeStore(initialState) {
   const middleware = [
     // Initialising redux-thunk with extra arguments will pass the below
     // arguments to all the redux-thunk actions. Below we are passing a
@@ -72,4 +72,4 @@ function configureStore(initialState) {
 //   axios: axios.create(axiosConfig),
 // })
 
-export default configureStore;
+export default makeStore;
