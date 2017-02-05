@@ -6,12 +6,16 @@ import axios from 'axios';
 import reducer from '../reducers';
 
 function makeStore(initialState) {
+  const axiosConfig = {
+    baseURL: 'http://localhost:3000/api/v1'
+  }
+
   const middleware = [
     // Initialising redux-thunk with extra arguments will pass the below
     // arguments to all the redux-thunk actions. Below we are passing a
     // preconfigured axios instance which can be used to fetch data with.
     // @see https://github.com/gaearon/redux-thunk
-    thunk.withExtraArgument({ axios }),
+    thunk.withExtraArgument({ axios: axios.create(axiosConfig) }),
   ]
 
   // Add a logger middleware only in the dev environment

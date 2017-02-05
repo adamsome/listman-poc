@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-const request = axios.create({
+const axiosConfig = {
   baseURL: 'http://localhost:3000/api/v1'
+}
+const request = axios.create({
 })
 
 export const fetchUser = (username) => (
