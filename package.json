@@ -114,24 +114,25 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "app/**/*.{js,jsx}"
+      "client/**/*.{js,jsx}",
+      "server/**/*.{js,jsx}",
+      "shared/**/*.{js,jsx}"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
     "testPathIgnorePatterns": [
+      "<rootDir>/(server.bak|config.bak|scripts|app)/",
       "<rootDir>/(build|docs|internal|node_modules|public)/"
     ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^.+\\.css$": "<rootDir>/internal/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/internal/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    }
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

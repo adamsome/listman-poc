@@ -1,5 +1,10 @@
 exports[`<Error404 /> renders 1`] = `
-<div>
-  Sorry, that page was not found.
-</div>
+<MainColumns>
+  <h1
+    className="title is-1">
+    Page not found!
+  </h1>
+  <p
+    className="subtitle is-5" />
+</MainColumns>
 `;
