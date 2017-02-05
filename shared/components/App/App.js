@@ -3,7 +3,7 @@ import { Match, Miss } from 'react-router'
 
 import AsyncHome from './AsyncHome';
 import AsyncPosts from './AsyncPosts';
-import Error404 from './Error404';
+import Error404 from '../Error404';
 import DevFooter from './DevFooter'
 
 import './App.scss';

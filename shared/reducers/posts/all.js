@@ -1,13 +1,3 @@
-/* @flow */
-
-import type { Reducer } from 'redux';
-import type { Action } from '../../types/redux';
-
-// -----------------------------------------------------------------------------
-// EXPORTED REDUCER STATE TYPE
-
-export type State = Array<number>;
-
 // -----------------------------------------------------------------------------
 // PRIVATES
 
@@ -16,7 +6,7 @@ const defaultState = [];
 // -----------------------------------------------------------------------------
 // REDUCER
 
-function all(state: State = defaultState, action: Action) : State {
+function all(state = defaultState, action) {
   if (action.type === 'FETCHED_POST') {
     const post = action.payload;
     return state.find(x => post.id === x)
@@ -30,11 +20,11 @@ function all(state: State = defaultState, action: Action) : State {
 // -----------------------------------------------------------------------------
 // EXPORTED SELECTORS
 
-export function getAll(state: State) : Array<number> {
+export function getAll(state) {
   return state;
 }
 
 // -----------------------------------------------------------------------------
 // EXPORTED REDUCER
 
-export default (all: Reducer<State, Action>);
+export default (all);

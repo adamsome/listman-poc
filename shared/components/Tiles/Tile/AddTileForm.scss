@@ -1,0 +1,16 @@
+/* Form input is inside of the Bulma .box */
+.tile__add-form-name {
+    font-weight: 300;
+    height: 1.285em;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 0.25rem;
+}
+
+/* Light colored instructions */
+.tile__add-form-instructions {
+    color: hsl(0, 0%, 71%);
+    margin-bottom: 0;
+}

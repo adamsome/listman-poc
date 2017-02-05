@@ -1,7 +1,6 @@
 import React from 'react'
 
-//import ListTiles from '../../containers/ListTiles'
-import Tiles from '../Tiles'
+import Tiles from '../../../Tiles'
 import UserProfile from '../UserProfile'
 import BodyColumn from '../Layout/BodyColumn'
 import Container from '../Layout/Container'
@@ -28,7 +27,7 @@ const UserPage = ({ user, lists, isLoading,
             </article>
           : null
       }
-      <Tiles 
+      <Tiles
         entities={lists}
         isLoading={isLoading}
         isAdding={isAdding}

@@ -122,7 +122,7 @@
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>/(server.bak|config.bak|scripts|app)/",
+      "<rootDir>/(server.bak|config.bak|scripts|app.bak)/",
       "<rootDir>/(build|docs|internal|node_modules|public)/"
     ],
     "transform": {

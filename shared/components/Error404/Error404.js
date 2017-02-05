@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BodyColumn from '../../Layout/BodyColumn'
+import BodyColumn from '../Layout/BodyColumn'
 
 const Error404 = ({ error }) => (
   <BodyColumn>
