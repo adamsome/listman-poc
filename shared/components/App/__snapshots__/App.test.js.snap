@@ -12,8 +12,8 @@ exports[`test renders correctly 1`] = `
       pattern="/404" />
     <Match
       component={[Function]}
-      exactly={false}
-      pattern="/posts" />
+      exactly={true}
+      pattern="/:username" />
     <Miss
       component={[Function]} />
   </section>

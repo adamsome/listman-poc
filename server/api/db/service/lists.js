@@ -1,3 +1,10 @@
+const handleError = (msg) => (err) => {
+  const e = new Error()
+  e.message = msg
+  e.inner = err
+  throw e
+}
+
 const lists = (db, pgp) => ({
 
   byUser: (username) =>
@@ -21,7 +28,7 @@ const lists = (db, pgp) => ({
       returning *
       `,
       [ list.name, username ]
-    ),
+    ).catch(handleError(`User '${username}' not found.`)),
 })
 
 export default lists

@@ -6,7 +6,8 @@ export const handleError = (err, req, res) => {
   const e = new Error()
   e.name = err.name
   e.message = err.message
-  e.stackd = err.stack
+  console.error(e)
+  if (err.inner) console.log(err.inner)
   res.status(err.status || 500).json({ error: e })
   res.end()
 }

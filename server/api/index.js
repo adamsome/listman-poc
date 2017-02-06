@@ -8,6 +8,7 @@ import logger from 'morgan'
 import router from './middleware/router'
 import security from './middleware/security'
 import errorHandlers from './middleware/errorHandlers'
+import clientOrigin from './middleware/clientOrigin'
 // TODO: Use config data instead of hard-coding
 //import getConfig from '../config/get'
 
@@ -18,7 +19,10 @@ const app = express()
 app.disable('x-powered-by')
 
 // Security middlewares.
-//app.use(...security)
+app.use(...security)
+
+// Allow client server to access
+app.use(clientOrigin)
 
 // Gzip compress the responses.
 app.use(compression())
