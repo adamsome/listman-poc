@@ -12,7 +12,7 @@ exports[`test renders correctly 1`] = `
       pattern="/404" />
     <Match
       component={[Function]}
-      exactly={true}
+      exactly={false}
       pattern="/:username" />
     <Miss
       component={[Function]} />

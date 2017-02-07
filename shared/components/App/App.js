@@ -13,7 +13,7 @@ const App = () => (
     <section className="section">
       <Match exactly pattern="/" component={AsyncHome} />
       <Match exactly pattern="/404" component={Error404} />
-      <Match exactly pattern="/:username" component={UserLists} />
+      <Match pattern="/:username" component={UserLists} />
       <Miss component={Error404} />
     </section>
     <DevFooter />

@@ -3,9 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router';
-import { withAsyncComponents } from 'react-async-component';
 import { Provider as ReduxProvider } from 'react-redux';
-import { rehydrateJobs } from 'react-jobs/ssr';
 
 import makeStore from '../shared/redux/store';
 import ReactHotLoader from './components/ReactHotLoader';
@@ -31,16 +29,7 @@ function renderApp(TheApp) {
     </ReactHotLoader>
   );
 
-  // We use the react-async-component in order to support super easy code splitting
-  // within our application.  It's important to use this helper
-  // @see https://github.com/ctrlplusb/react-async-component
-  withAsyncComponents(app)
-    .then(({ appWithAsyncComponents }) =>
-      rehydrateJobs(appWithAsyncComponents)
-    )
-    .then(({ appWithJobs }) =>
-      render(appWithJobs, container)
-    );
+  render(app, container)
 }
 
 // Execute the first render of our app.

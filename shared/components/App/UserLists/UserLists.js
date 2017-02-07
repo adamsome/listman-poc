@@ -46,18 +46,15 @@ export class UserLists extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const username = ownProps.params.username
-  return {
-    username,
-    user: fromUsers.getUser(fromApp.getUsers(state), username),
-    lists: fromApp.getListsByUser(state, username),
-    isLoading: fromApp.getListsByUserIsLoading(state, username),
-    error: fromApp.getListsByUserError(state, username),
-    isAdding: fromApp.getListsByUserIsAdding(state, username),
-    addError: fromApp.getListsByUserAddError(state, username),
-  }
-}
+const mapStateToProps = (state, { params: { username } }) => ({
+  username,
+  user: fromUsers.getUser(fromApp.getUsers(state), username),
+  lists: fromApp.getListsByUser(state, username),
+  isLoading: fromApp.getListsByUserIsLoading(state, username),
+  error: fromApp.getListsByUserError(state, username),
+  isAdding: fromApp.getListsByUserIsAdding(state, username),
+  addError: fromApp.getListsByUserAddError(state, username),
+})
 
 export default connect(
   mapStateToProps,
