@@ -11,7 +11,7 @@ get('/users/:username', req => db.users.find(req.params.username))
 
 get('/users/:username/lists', req => db.lists.byUser(req.params.username))
 
-post('/users/:user/lists', req => db.lists.add(req.params.user, req.body))
+post('/users/:username/lists', req => db.lists.add(req.params.username, req.body))
 
 app.use('*', (req, res) => handleError({
   name: 'APIError',
