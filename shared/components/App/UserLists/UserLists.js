@@ -9,8 +9,7 @@ import Error404 from '../../Error404'
 
 export class UserLists extends React.Component {
   componentDidMount() {
-    const { username } = this.props
-    this.fetchUserLists(username)
+    this.fetchUserLists(this.props)
   }
 
   componentDidUpdate(prevProps) {
@@ -20,11 +19,11 @@ export class UserLists extends React.Component {
     if (username !== prevUsername) {
       console.log(`<UserLists> update fetch` +
                   `(user ${username} != prevUser ${prevUsername})`)
-      this.fetchUserLists(username)
+      this.fetchUserLists(this.props)
     }
   }
 
-  fetchUserLists(username) {
+  fetchUserLists({ username }) {
     this.props.fetchUserListsIfNeeded(username)
       .then(() => this.props.fetchUserIfNeeded(username))
       .catch(e => e) // Actions handle the errors
