@@ -47,9 +47,7 @@ const renderProfile = (user, isLoading) => (
 )
 
 const UserProfile = ({ user, isLoading }) => {
-  // TODO: Refactor, new fn passing userOrBlank properties & class to render
   const userOrBlank = (isLoading || !user) ? loadingUser : user
-  // TODO: PICKUP render loading for title/desc and menu
   return (
     <div>
       <Media

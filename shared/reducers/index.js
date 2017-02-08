@@ -12,7 +12,6 @@ export default combineReducers({
   users,
   lists,
   listsByUser,
-  posts, // TODO: TEMP
 })
 
 // -----------------------------------------------------------------------------
