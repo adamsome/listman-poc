@@ -347,15 +347,15 @@ export default function webpackConfigFactory(buildOptions) {
               presets: [
                 // JSX
                 'react',
-                // Stage 3 javascript syntax.
-                // "Candidate: complete spec and initial browser implementations."
-                // Add anything lower than stage 3 at your own risk. :)
-                'stage-0',
                 // For our client bundles we transpile all the latest ratified
                 // ES201X code into ES5, safe for browsers.  We exclude module
                 // transilation as webpack takes care of this for us, doing
                 // tree shaking in the process.
                 ifClient(['latest', { es2015: { modules: false } }]),
+                // Stage 3 javascript syntax.
+                // "Candidate: complete spec and initial browser implementations."
+                // Add anything lower than stage 3 at your own risk. :)
+                'stage-0',
                 // For a node bundle we use the awesome babel-preset-env which
                 // acts like babel-preset-latest in that it supports the latest
                 // ratified ES201X syntax, however, it will only transpile what
