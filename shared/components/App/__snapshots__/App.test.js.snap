@@ -1,0 +1,22 @@
+exports[`test renders correctly 1`] = `
+<div>
+  <section
+    className="section">
+    <Match
+      component={[Function]}
+      exactly={true}
+      pattern="/" />
+    <Match
+      component={[Function]}
+      exactly={true}
+      pattern="/404" />
+    <Match
+      component={[Function]}
+      exactly={false}
+      pattern="/:username" />
+    <Miss
+      component={[Function]} />
+  </section>
+  <DevFooter />
+</div>
+`;

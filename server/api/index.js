@@ -1,11 +1,30 @@
+/* eslint-disable no-console */
+
 import express from 'express'
+import compression from 'compression'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 
-import db from './db'
-import { makeMethods, handleError } from './requestUtil'
+import router from './middleware/router'
+import security from './middleware/security'
+import errorHandlers from './middleware/errorHandlers'
+import clientOrigin from './middleware/clientOrigin'
+import getConfig from '../../config/get'
 
+// Create our express based server.
 const app = express()
+
+// Don't expose any software information to potential hackers.
+app.disable('x-powered-by')
+
+// Security middlewares.
+app.use(...security)
+
+// Allow client server to access
+app.use(clientOrigin)
+
+// Gzip compress the responses.
+app.use(compression())
 
 app.use(logger('dev'))
 
@@ -20,20 +39,19 @@ app.use((req, res, next) => {
   next()
 })
 
-const { get, post } = makeMethods(app)
+// Handle API routes
+app.use('/api/v1', router)
 
-get('/users/:user', req => db.users.find(req.params.user))
+// Error Handler middlewares.
+app.use(...errorHandlers)
 
-get('/users/:username/lists', req => db.lists.byUser(req.params.username))
+// Create an http listener for our express app.
+const port = getConfig('apiPort')
+const listener = app.listen(port, 'localhost', () =>
+  console.log(`API listening on port ${port}`),
+)
 
-post('/users/:user/lists', req => db.lists.add(req.params.user, req.body))
+// We export the listener as it will be handy for our development hot reloader,
+// or for exposing a general extension layer for application customisations.
+export default listener
 
-app.use('*', (req, res) => handleError({
-  name: 'APIError',
-  message: 'API route not found',
-  status: 404
-}))
-
-app.use(handleError)
-
-export default app

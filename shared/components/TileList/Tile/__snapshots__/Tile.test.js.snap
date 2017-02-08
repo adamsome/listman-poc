@@ -1,0 +1,12 @@
+exports[`test shows name 1`] = `
+<a
+  className="box-tile">
+  <span
+    className="box-tile__title-wrapper">
+    <span
+      className="box-tile__title">
+      Tile Name
+    </span>
+  </span>
+</a>
+`;

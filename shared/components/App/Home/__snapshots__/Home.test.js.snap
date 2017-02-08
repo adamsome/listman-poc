@@ -1,0 +1,14 @@
+exports[`<Home /> renders 1`] = `
+<MainColumns>
+  <HelmetWrapper
+    title="Home" />
+  <h2
+    className="title is-1">
+    Listman!
+  </h2>
+  <p
+    className="subtitle is-5">
+    Under Construction!
+  </p>
+</MainColumns>
+`;

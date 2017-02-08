@@ -1,0 +1,30 @@
+@import '../../../style/theme';
+
+/* Adjust for large '+' symbol and show simple light gray Bulma .box */
+.box-tile--add {
+  background-color: $light;
+  padding: 0rem 1.25rem 1rem 1.25rem;
+  box-shadow: none;
+}
+
+.box-tile__title--add {
+  max-height: none;
+  font-weight: $weight-semibold;
+  color: $grey-lighter;
+  font-size: 4.5rem;
+  line-height: 1.125;
+}
+
+/* Adjust for medium-large 'Adding...' indicator */
+.box-tile__title--adding {
+  font-size: 2rem;
+  padding-top: 1.75rem;
+  padding-bottom: 1.1rem;
+}
+
+/* Adjust box for a form input inside & show blue border */
+.box-tile--add-form-open {
+  padding: 1.10rem 1.25rem 1.25rem 1.25rem;
+  box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px $link;
+}
+
