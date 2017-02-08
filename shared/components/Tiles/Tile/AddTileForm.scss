@@ -1,16 +1,28 @@
-/* Form input is inside of the Bulma .box */
-.tile__add-form-name {
-    font-weight: 300;
-    height: 1.285em;
-    padding-left: 0;
-    padding-right: 0;
-    border: none;
-    box-shadow: none;
-    margin-bottom: 0.25rem;
+@import '../../../style/theme';
+
+/* Form input is inside of the box tile */
+.box-tile--add__input {
+  color: $grey-darker;
+  font-size: $size-4;
+  font-weight: $weight-light;
+  height: 1.285em;
+  width: 100%;
+  margin-bottom: 0.25rem;
+  padding-left: 0;
+  padding-right: 0;
+  box-shadow: none;
+  border: none;
+  border-radius: 5px;
+  &:focus,
+  &.is-focused,
+  &:active,
+  &.is-active {
+    outline: none;
+  }
 }
 
 /* Light colored instructions */
-.tile__add-form-instructions {
-    color: hsl(0, 0%, 71%);
+.box-tile--add__input-instructions {
+    color: $grey-light;
     margin-bottom: 0;
 }

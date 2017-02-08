@@ -1,38 +1,30 @@
+@import '../../../style/theme';
+
 /* Adjust for large '+' symbol and show simple light gray Bulma .box */
-.tile__add {
-  padding-top: 0rem;
-  padding-bottom: 1.15rem;
-  background-color: hsl(0, 0%, 96%);
+.box-tile--add {
+  background-color: $light;
+  padding: 0rem 1.25rem 1rem 1.25rem;
   box-shadow: none;
 }
 
-.tile__add__title-wrapper {
-  display: block;
-  min-height: 4rem;
-}
-
-.tile__add__title {
-  display: inline-block;
-  color: hsl(0, 0%, 86%);
-  max-height: 4.5rem;
+.box-tile__title--add {
+  max-height: none;
+  font-weight: $weight-semibold;
+  color: $grey-lighter;
   font-size: 4.5rem;
-  overflow: hidden;
-}
-
-/* Adjust Bulma .box for a form input inside & show blue border */
-a.box.tile__add--form-open {
-  padding-top: 1.25rem;
-  padding-bottom: 0.75rem;
-  background-color: white;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px #3872ff;
+  line-height: 1.125;
 }
 
 /* Adjust for medium-large 'Adding...' indicator */
-.tile__add--adding {
+.box-tile__title--adding {
+  font-size: 2rem;
   padding-top: 1.75rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 1.1rem;
 }
 
-.tile__add__title--adding {
-  font-size: 2rem;
+/* Adjust box for a form input inside & show blue border */
+.box-tile--add-form-open {
+  padding: 1.10rem 1.25rem 1.25rem 1.25rem;
+  box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px $link;
 }
+

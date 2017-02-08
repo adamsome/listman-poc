@@ -37,7 +37,7 @@ export class AddTileForm extends React.Component {
       <div>
         <p>
           <input
-            className="tile__add-form-name input is-large"
+            className="box-tile--add__input"
             type="text"
             placeholder="Name..."
             value={this.state.addingName}
@@ -46,7 +46,7 @@ export class AddTileForm extends React.Component {
             onKeyDown={::this.handleKeyDown}
           />
         </p>
-        <p className="tile__add-form-instructions control">
+        <p className="box-tile--add__input-instructions control">
           Enter to add, Esc to cancel
         </p>
       </div>

@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import classNames from 'classnames'
 
 import AddTileForm from './AddTileForm'
 import './AddTile.scss'
@@ -12,36 +13,31 @@ export default class AddTile extends React.Component {
   }
 
   render() {
-    const { isLoading, isAdding, add } = this.props
+    const { isAdding, add } = this.props
 
-    let className = "box tile__add"
-    if (isLoading) {
-      className += " tile--loading"
-    } else if (this.state.isFormOpen) {
-      className += " tile__add--form-open"
-    } else {
-      className += " level"
-    }
-
-    if (isAdding) {
-      className += " tile__add--adding is-disabled"
-    }
-
-    let titleClassName = "tile__add__title title"
-    if (isAdding) {
-      titleClassName += " tile__add__title--adding"
-    }
+    const className = classNames({
+      "box-tile": true,
+      "box-tile--add": !this.state.isFormOpen,
+      "level": !this.state.isFormOpen,
+      "box-tile--add-form-open": this.state.isFormOpen,
+      "is-disabled": isAdding,
+    })
+    const titleClassName = classNames({
+      "box-tile__title": true,
+      "box-tile__title--add": true,
+      "box-tile__title--adding": isAdding,
+    })
 
     return (
       <a
         className={className}
         onClick={() => this.setState({ isFormOpen: true })}
       >
-        <span className="tile__add__title-wrapper level-item has-text-centered">
+        <span className="level-item">
           {
             (!this.state.isFormOpen)
               ? <span className={titleClassName}>
-                  {(isAdding) ? 'Adding...' : (isLoading) ? ' ' : '+'}
+                  {(isAdding) ? 'Adding...' : '+'}
                 </span>
               : <AddTileForm
                   add={add}

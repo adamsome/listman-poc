@@ -1,13 +1,17 @@
 import React from 'react';
+import classNames from 'classnames'
 
 import './Tile.scss'
 
 const Tile = ({ name, isLoading }) => {
-  const className = "tile box" + ((isLoading) ? " tile--loading" : "")
+  const className = classNames({
+    "box-tile": true,
+    "box-tile--loading": isLoading,
+  })
   return (
     <a className={className}>
-      <span className="tile__title-wrapper">
-        <span className="tile__title title is-4">
+      <span className="box-tile__title-wrapper">
+        <span className="box-tile__title">
           {name || ' '}
         </span>
       </span>
