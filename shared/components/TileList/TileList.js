@@ -12,7 +12,7 @@ const loadingEntities = Array.from(new Array(7), () => ({}))
 // If no transform passed to get entities' name, use entity.name by default
 const defaultGetEntityName = (entity) => entity.name
 
-const Tiles = ({ entities, isLoading, isAdding, add,
+const TileList = ({ entities, isLoading, isAdding, add,
                  getEntityName = defaultGetEntityName, }) => {
 
   const entitiesOrBlank = (isLoading || !entities) ? loadingEntities : entities
@@ -35,4 +35,4 @@ const Tiles = ({ entities, isLoading, isAdding, add,
   )
 }
 
-export default Tiles
+export default TileList
