@@ -42,6 +42,9 @@ const values = {
   // The port on which the client bundle development server should run.
   clientDevServerPort: envVars.int('CLIENT_DEV_PORT', 7331),
 
+  // The port on which the API server should run
+  apiPort: envVars.int('API_PORT', 1338),
+
   // This is an example environment variable which is consumed within the
   // './client.js' config.  See there for more details.
   welcomeMessage: envVars.string('WELCOME_MSG', 'Listman!'),

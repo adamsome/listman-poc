@@ -9,8 +9,7 @@ import router from './middleware/router'
 import security from './middleware/security'
 import errorHandlers from './middleware/errorHandlers'
 import clientOrigin from './middleware/clientOrigin'
-// TODO: Use config data instead of hard-coding
-//import getConfig from '../config/get'
+import getConfig from '../../config/get'
 
 // Create our express based server.
 const app = express()
@@ -47,8 +46,7 @@ app.use('/api/v1', router)
 app.use(...errorHandlers)
 
 // Create an http listener for our express app.
-// TODO: Load from config
-const port = 1338
+const port = getConfig('apiPort')
 const listener = app.listen(port, 'localhost', () =>
   console.log(`API listening on port ${port}`),
 )

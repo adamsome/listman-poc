@@ -1,6 +1,5 @@
 import pgPromise from 'pg-promise'
 
-// TODO: Inject services into pg-promise
 import userService from './service/users'
 import listService from './service/lists'
 

@@ -1,8 +1,6 @@
 const clientOrigin = (req, res, next) => {
   // Website you wish to allow to connect
-  // TODO: Drive from config
-  res.setHeader('Access-Control-Allow-Origin',
-                'http://localhost:1337');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods',
                 'GET, POST, PUT, PATCH, DELETE');
